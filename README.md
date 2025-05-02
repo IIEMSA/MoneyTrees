@@ -246,15 +246,6 @@ A comprehensive [video walkthrough]https://www.youtube.com/  showcases:
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ---
-
-## Acknowledgements
-
-* Icons provided by [Material Design](https://material.io/resources/icons/).
-* Graph visualizations powered by [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart).
-* Guidance on RoomDB implementation from [Android Developers](https://developer.android.com/training/data-storage/room).([GitHub][4], [Android Developers][1])
-
----
-
 **Contact**: \ST10380788@IMCONNECT.EDU.ZA/ST10361620@IMCONNECT.EDU.ZA/ST10369736@IMCONNECT.EDU.ZA | [GitHub Profile](https://github.com/IIEMSA/opsc6311-poe-part-2-group1-Lwandle-Chauke)
 **Submission**: This project is part of the Portfolio of Evidence (POE) for OPSC6311.
 
