@@ -1,0 +1,62 @@
+[versions]
+# Android Gradle Plugin and Kotlin versions must be compatible
+agp = "8.8.0"               # Android Gradle Plugin version
+kotlin = "1.9.24"           # Kotlin version (must match AGP compatibility)
+
+# AndroidX Core versions
+coreKtx = "1.13.1"          # Core KT extensions
+appcompat = "1.7.0"         # AppCompat library
+material = "1.12.0"         # Material Design components
+activity = "1.9.0"          # Activity components
+constraintlayout = "2.2.0"  # ConstraintLayout version
+glide = "4.16.0"
+
+# Database and Architecture Components
+room = "2.6.1"              # Room Database version
+lifecycle = "2.6.2"         # Lifecycle components
+coroutines = "1.7.3"        # Coroutines version
+
+# Security
+bcrypt = "0.10.2"           # Password hashing library
+
+# Testing
+junit = "4.13.2"            # Unit testing
+junitVersion = "1.2.0"      # Android JUnit runner
+espressoCore = "3.6.0"      # Espresso UI testing
+
+[libraries]
+# Android Core Libraries
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+
+glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
+glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
+
+# Database Components
+androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
+
+# Architecture Components
+androidx-lifecycle-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" }
+androidx-lifecycle-livedata = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle" }
+
+# Coroutines
+kotlinx-coroutines = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
+
+# Security
+bcrypt = { group = "at.favre.lib", name = "bcrypt", version.ref = "bcrypt" }
+
+# Testing
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+
+[plugins]
+# Plugin versions
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }  # Required for Room

@@ -1,0 +1,54 @@
+<resources>
+    <!-- 🌳 App Info -->
+    <string name="app_name">Money Trees 1</string>
+
+    <string name="total_transactions">Total: %s</string>
+
+    <!-- 🧑‍💼 Profile -->
+    <string name="edit_profile">EDIT PROFILE</string>
+    <string name="save_profile">Save Profile</string>
+    <string name="save_changes">SAVE CHANGES</string>
+    <string name="profile_updated">Profile updated successfully</string>
+    <string name="fill_all_fields">Please fill all required fields</string>
+
+    <!-- 🔔 Navigation Bar -->
+    <string name="notifications">Notifications</string>
+    <string name="home">Home</string>
+    <string name="settings">Settings</string>
+    <string name="profile">Profile</string>
+    <string name="menu">Menu</string>
+
+    <!-- 📊 Budget Planner -->
+    <string name="budget_planner">Budget Planner</string>
+    <string name="monthly">Monthly</string>
+    <string name="weekly">Weekly</string>
+    <string name="enter_budget_amount_rands">Enter budget amount (Rands)</string>
+    <string name="budget_categories">Budget Categories</string>
+
+    <!-- 🏷️ Category Labels -->
+    <string name="groceries">Groceries</string>
+    <string name="transport">Transport</string>
+    <string name="entertainment">Entertainment</string>
+
+
+    <!-- 📝 Hints -->
+    <string name="enter_amount_r">Enter amount (R)</string>
+
+    <!-- ➕ Buttons -->
+    <string name="add_budget_category">Add Budget Category</string>
+    <string name="save_budget">Save Budget</string>
+
+    <!-- 💰 Budget Totals -->
+    <string name="total_budget_label">Total Budget:</string>
+    <string name="total_budget_example">R 5800.00</string>
+
+    <!-- 📈 Progress -->
+    <string name="progress_percentage_placeholder">0%</string>
+    <string name="financial_overview">Financial Overview</string>
+    <string name="budget_progress">Budget Progress</string>
+    <string name="download_stats_as_pdf">Download Stats as PDF</string>
+
+
+
+
+</resources>

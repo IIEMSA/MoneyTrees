@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp"
+    android:layout_margin="4dp"
+    android:background="#F9F9F9"
+    android:layout_gravity="center">
+
+    <TextView
+        android:id="@+id/tv_category_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="#FF69B4"
+        android:textStyle="bold"
+        android:text="Category Name" />
+
+    <TextView
+        android:id="@+id/tv_total_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="#000000"
+        android:text="0.00" />
+
+    <TextView
+        android:id="@+id/tv_category_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Category Total"
+        android:textColor="#000000"
+        android:textSize="12sp" />
+</LinearLayout>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFF0F5"
+    android:padding="16dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Navigation Menu -->
+        <LinearLayout
+            android:id="@+id/navigation_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFA0BC"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/nav_menu"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:clickable="true"
+                android:contentDescription="Menu"
+                android:src="@drawable/menu" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="170dp"
+                android:layout_height="46dp"
+                android:layout_weight="1"
+                android:text="ADD EXPENSE"
+                android:textAlignment="center"
+                android:textColor="#FDFDFD"
+                android:textSize="34sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Logo (optional, add your logo if needed) -->
+
+        <!-- Header -->
+
+        <!-- Expense Name -->
+
+        <!-- Expense Amount -->
+        <EditText
+            android:id="@+id/et_expense_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#FF69B4"
+            android:hint="Expense Name"
+            android:padding="12dp"
+            android:textColorHint="#FF69B4" />
+
+        <EditText
+            android:id="@+id/et_expense_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Amount (e.g. 120.50)"
+            android:inputType="numberDecimal"
+            android:backgroundTint="#FF69B4"
+            android:textColor="#000000"
+            android:textColorHint="#FF69B4"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+
+        <!-- Category Spinner -->
+        <Spinner
+            android:id="@+id/spinner_category"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:minHeight="48dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#FF69B4" />
+
+        <!-- Date -->
+        <EditText
+            android:id="@+id/et_expense_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Select Date"
+            android:focusable="false"
+            android:backgroundTint="#FF69B4"
+            android:textColorHint="#FF69B4"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Start Time -->
+        <EditText
+            android:id="@+id/et_start_time"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Start Time"
+            android:focusable="false"
+            android:backgroundTint="#FF69B4"
+            android:textColorHint="#FF69B4"
+            android:textColor="#000000"
+            android:padding="10dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- End Time -->
+        <EditText
+            android:id="@+id/et_end_time"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="End Time"
+            android:focusable="false"
+            android:backgroundTint="#FF69B4"
+            android:textColorHint="#FF69B4"
+            android:textColor="#000000"
+            android:padding="10dp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Description -->
+        <EditText
+            android:id="@+id/et_description"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="24dp"
+            android:backgroundTint="#FF69B4"
+            android:hint="Description"
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            android:padding="12dp"
+            android:textColorHint="#FF69B4" />
+
+        <!-- Select Image Button -->
+        <Button
+            android:id="@+id/select_image_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select Image"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#FF4081" />
+
+        <!-- Image Name TextView -->
+        <TextView
+            android:id="@+id/image_name_textview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="No image selected"
+            android:textColor="#FF4081"
+            android:textSize="14sp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Save Button -->
+        <Button
+            android:id="@+id/btn_save_expense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save Expense"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#FF69B4"
+            android:textStyle="bold" />
+    </LinearLayout>
+</ScrollView>

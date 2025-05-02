@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffe0e2"
+    tools:context=".ui.MainActivity">
+
+    <!-- Navigation Menu -->
+    <LinearLayout
+        android:id="@+id/navigation_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFA0BC"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/nav_menu"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:clickable="true"
+            android:contentDescription="Menu"
+            android:src="@drawable/menu" />
+
+        <TextView
+            android:id="@+id/tvWelcome"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="WELCOME"
+            android:textAlignment="center"
+            android:textColor="#FFFEFE"
+            android:textSize="34sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Budget Summary Title -->
+    <TextView
+        android:id="@+id/budget_summary_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Budget Summary"
+        android:textColor="#E91E63"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/navigation_menu" />
+
+    <TextView
+        android:id="@+id/budget_summary_title2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="144dp"
+        android:text="Budget Summary Cards"
+        android:textColor="#E91E63"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/navigation_menu" />
+
+    <ProgressBar
+        android:id="@+id/budget_progress"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/budget_summary_title" />
+
+    <!-- Spent/Remaining Row -->
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/budget_progress">
+
+        <TextView
+            android:id="@+id/tv_budget_spent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Spent: R0.00"
+            android:textAlignment="center"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_budget_remaining"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Remaining: R0.00"
+            android:textAlignment="center"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <!-- Total Expenses -->
+    <TextView
+        android:id="@+id/tvTotalExpenses"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="16dp"
+        android:textColor="#FF4081"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout"/>
+
+    <!-- Recent Activity Title -->
+
+    <!-- RecyclerView for Recent Activity -->
+
+    <!-- SHOWS UP WHEN THE RECYCLER IS EMPTY-->
+
+    <TextView
+        android:id="@+id/recent_activity_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="244dp"
+        android:text="Recent Transactions"
+        android:textColor="#E91E63"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/budget_summary_title" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recent_activity_recycler"
+        android:layout_width="423dp"
+        android:layout_height="194dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="Recent transactions list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recent_activity_title" />
+
+    <TextView
+        android:id="@+id/empty_recent_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No recent activity"
+        android:textColor="#999999"
+        android:textSize="16sp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/recent_activity_recycler"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
+
+
+    <!-- ScrollView for Expense Items -->
+
+    <TextView
+        android:id="@+id/txt_past_transactions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="284dp"
+        android:layout_marginBottom="172dp"
+        android:text="Past Transactions"
+        android:textColor="#333333"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/expense_list_container"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scroll_expense_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/button_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout"
+        app:layout_constraintVertical_bias="0.723">
+
+    </ScrollView>
+
+    <!-- Budget Summary Cards Row -->
+
+
+    <!-- Bottom Buttons -->
+
+    <LinearLayout
+        android:id="@+id/budget_summary_cards"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout">
+
+        <TextView
+            android:id="@+id/budget_status"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="#ff79a3"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="Budget Type\nR0.00"
+            android:textColor="#000"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/account_balance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:background="#ff79a3"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="Total Budget\nR0.00"
+            android:textColor="#000"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/savings_progress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="#ff79a3"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="Daily Average\nR0.00"
+            android:textColor="#000"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/button_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/btn_add_expense"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="#FF69B4"
+            android:text="Add Expense"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btn_add_category"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:backgroundTint="#FF69B4"
+            android:text="Detailed Budget Summary"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/expense_list_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="56dp"
+        android:orientation="vertical"
+        android:padding="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_container"
+        tools:layout_editor_absoluteX="0dp">
+
+        <!-- Example single expense layout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="#FFFFFF"
+            android:elevation="2dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <ImageView
+                android:id="@+id/expense_image"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/pink_circle_background"
+                android:padding="4dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_image_placeholder" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingStart="12dp">
+
+                <TextView
+                    android:id="@+id/expense_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Expense Name"
+                    android:textColor="#FF69B4"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/expense_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Category"
+                    android:textColor="#A0527D"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/view_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="View Image"
+                    android:textColor="#FF69B4"
+                    android:textSize="14sp"
+                    android:textStyle="italic" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

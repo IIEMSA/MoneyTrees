@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Budget card styling dimensions -->
+    <dimen name="budget_card_corner_radius">8dp</dimen>
+    <dimen name="budget_card_elevation">4dp</dimen>
+    <dimen name="budget_summary_margin">16dp</dimen>
+</resources>

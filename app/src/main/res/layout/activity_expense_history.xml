@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#FFF0F5">
+
+    <!-- Navigation Menu -->
+    <LinearLayout
+        android:id="@+id/navigation_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFA0BC"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/nav_menu"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:clickable="true"
+            android:contentDescription="Menu"
+            android:src="@drawable/menu" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="170dp"
+            android:layout_height="46dp"
+            android:layout_weight="1"
+            android:text="EXPENSE HISTORY"
+            android:textAlignment="center"
+            android:textColor="#FDFDFD"
+            android:textSize="34sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <!-- Date Range Selector -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="16dp">
+
+        <EditText
+            android:id="@+id/et_start_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Start Date"
+            android:focusable="false"
+            android:backgroundTint="#FF69B4"
+            android:textColorHint="#FF69B4"
+            android:padding="12dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" to "
+            android:textSize="16sp"
+            android:layout_marginHorizontal="8dp"/>
+
+        <EditText
+            android:id="@+id/et_end_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="End Date"
+            android:focusable="false"
+            android:backgroundTint="#FF69B4"
+            android:textColorHint="#FF69B4"
+            android:padding="12dp"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_filter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Filter Expenses"
+        android:backgroundTint="#FF69B4"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Category Totals -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_category_totals"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_category_total" />
+
+    <!-- Total Transactions -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:background="#FFEDF7"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Total Transactions:"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tv_total_transactions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#FF69B4"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Category"
+        android:padding="12dp" />
+
+    <!-- Expense List -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_expenses"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="8dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    <!-- Empty State -->
+    <TextView
+        android:id="@+id/empty_state_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="No expenses found"
+        android:visibility="gone"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"/>
+</LinearLayout>
