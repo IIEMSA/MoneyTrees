@@ -30,7 +30,7 @@
 * Log expenses with details including amount, date, time range, description, category, and optional receipt photos.
 * View and filter expenses by date range or category.
 
-### 🗂Category Customisation
+### Category Customisation
 
 * Create and delete custom expense categories (e.g., "Groceries," "Entertainment").
 
