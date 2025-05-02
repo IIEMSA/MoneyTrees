@@ -16,6 +16,21 @@
 * Encourage consistent usage through achievements, badges, and progress visualizations.
 * Provide actionable insights via graphs, budgets, and category-wise spending analysis.
 
+## What the App Does
+
+The **Money Trees Budget App** is designed to:
+
+- Track and categorize your expenses
+- Set personalized budgeting goals and limits
+- Provide real-time financial insights through analytics and reports
+- Engage you with gamified features, including challenges, achievements, and leaderboards
+- Allow shared wallets for group expenses (ideal for families, roommates, and friends)
+- Enable multi-currency tracking for international users
+- Provide reminders and alerts for bill payments and financial goals
+- Sync financial data across devices
+
+By using Money Trees, users can take charge of their money and make informed decisions that lead to greater financial freedom.
+
 ---
 ##Screenshots
 ![image](https://github.com/user-attachments/assets/71e3aee4-d378-4f0f-a62a-1270a94e7997)
@@ -30,46 +45,79 @@
 ![image](https://github.com/user-attachments/assets/824b8901-2c89-4e5a-8b88-2ff46e991dfd)
 
 
-
-
-
-
-
-
-
-
-
 ## Features
 
-### User Authentication
+### Innovative Features
+- **Shared Wallets**: Perfect for families, couples, or roommates to manage finances together and keep track of group expenses.
+- **Multiple Currencies**: For frequent travelers or users living abroad, track expenses in various currencies with automatic recalculation based on exchange rates.
+- **Alerts and Reminders**: Get reminders for upcoming bill payments, goal updates, and spending limits to stay on top of your finances.
+- **Double-Entry Accounting System**: Uses professional accounting techniques to ensure accurate financial records.
+- **PC Manager Functionality**: Sync your financial data with the mobile app using Wi-Fi for management on both mobile and desktop devices.
 
-* Secure registration and login using a username and password.
-* Credentials stored locally using Room Database for offline access.
+### Budgeting & Financial Goals
+- **Budget Creation**: Set monthly budget goals and track expenses for different categories (e.g., groceries, entertainment, transport).
+- **Progress Dashboard**: View your expenses against your budget, with visual indicators to highlight overages or savings.
 
-### Expense Management
+### Financial Insights & Analytics
+- **Spending Analytics**: View your spending trends through interactive charts and graphs (e.g., daily spending trends, category breakdowns).
+- **Report Generation**: Generate weekly or monthly reports to analyze your financial habits.
 
-* Log expenses with details including amount, date, time range, description, category, and optional receipt photos.
-* View and filter expenses by date range or category.
+### Gamification Features
+- **Mini Games**: Play Budget Bingo or Saving Quest, earning points and rewards for reaching financial milestones.
+- **Leaderboards**: Compete with friends or others for top spots on the leaderboard.
+- **Achievements**: Earn badges for reaching savings goals, staying within budget, and other financial milestones.
 
-### Category Customisation
+### Shared Wallets (Group Budgeting)
+- **Group Expenses**: Create shared wallets for group expenses and split costs automatically among members.
+- **Contribution Tracking**: Track contributions and receive alerts when funds are running low or additional contributions are needed.
 
-* Create and delete custom expense categories (e.g., "Groceries," "Entertainment").
+### Bank Integration (Simulated)
+- **Simulated Banking Account**: Connect to a simulated bank account to track and manage your transactions, balance, and income.
 
-### Budget Goals
+## Requirements
 
-* Set monthly total budget goals and category-specific limits.
-* Monitor progress through a dashboard with visual indicators for overspending.
+### 1. User Authentication & Security
+- **Account Registration**: Users must register with a unique username and password.
+- **Data Encryption**: All user credentials are securely encrypted, and end-to-end encryption is used for data transmission.
+- **Session Expiration**: Login sessions should expire after a predefined time for security.
 
-### Data Visualisation
+### 2. Expense Tracking
+- **Categories**: Users can create and categorize expenses (e.g., Groceries, Transport).
+- **Expense Entry**: Users can add details such as:
+  - Amount spent
+  - Date of transaction
+  - Category
+  - Receipt photo (optional)
+- **Filtering & Editing**: Users can filter expenses by date range and edit or delete entries.
 
-* Display daily spending trends using interactive graphs powered by MPAndroidChart.
-* Show category-wise totals in horizontal RecyclerView bars.
+### 3. Budgeting & Financial Goals
+- **Set Budget Goals**: Users can set a total monthly budget and individual category limits.
+- **Progress Tracking**: The app provides a progress dashboard showing expenses vs. budget and highlights categories that exceed limits.
+- **Alerts**: Receive alerts when spending exceeds budgets or when approaching a spending threshold.
 
-### Gamification Elements (coming soon)
+### 4. Financial Insights & Analytics
+- **Spending Analytics**: View graphs and charts for:
+  - Daily spending trends
+  - Spending breakdown by category
+- **Date Range Filtering**: Filter analytics by date range for custom reports.
 
-* Earn badges for consistent logging (e.g., "7-Day Streak").
-* Unlock achievements for meeting budget goals (e.g., "Frugal Champion").
-* Experience progress animations and celebratory feedback upon reaching milestones.
+### 5. Gamification Features
+- **Mini Games**: Play Budget Bingo or Saving Quest to win prizes and rewards.
+- **Points System**: Earn points for making responsible financial decisions and meeting budget goals.
+- **Leaderboards**: Compete with friends or the global community to earn rewards.
+- **Achievements & Badges**: Earn badges for completing financial milestones.
+
+### 6. Shared Wallets (Group Budgeting)
+- **Group Contributions**: Track expenses and contributions in a shared wallet for group activities or joint budgeting.
+- **Automatic Expense Splitting**: Expenses are split automatically among wallet members, and alerts are sent when contributions are needed.
+
+### 7. Bank Integration (Simulated)
+- **Bank Syncing**: Simulated banking account to track balance and sync transactions (for simulation purposes).
+- **Manual Income Tracking**: Users can manually add income sources and track payments.
+
+### 8. Performance & Optimization
+- **Fast Loading Times**: Ensure smooth and responsive performance, especially when syncing data and updating dashboards.
+- **Real-Time Updates**: The dashboard must refresh in real-time as new transactions are added.
 
 ### Technical Highlights
 
