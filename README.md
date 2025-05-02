@@ -141,9 +141,10 @@ By using Money Trees, users can take charge of their money and make informed dec
    https://github.com/IIEMSA/opsc6311-poe-part-2-group1-Lwandle-Chauke
    ```
 
-([Android Developers][1])
 2\. Open the project in Android Studio.
+
 3\. Sync Gradle dependencies.
+
 4\. Build and run the application on your device or emulator.
 
 ### Dependencies
@@ -181,7 +182,7 @@ The development followed the **Research → Plan → Design → Build → Evalua
 
 ### 1. Research
 
-* Analyzed competitor apps for user experience patterns.
+* Analysed competitor apps for user experience patterns.
 * Identified user pain points such as tedious logging and lack of motivation.
 
 ### 2. Plan
@@ -233,12 +234,6 @@ A comprehensive [video walkthrough]https://www.youtube.com/  showcases:
 2. Creating expenses with photo attachments.
 3. Setting up budget goals and viewing dashboard visualizations.
 4. Unlocking achievements through consistent logging.
-
-**Video Guidelines**:
-
-* Duration: 5 minutes with voice-over explanations.
-* Resolution: Compressed to 1080p, under 100MB for efficient uploading.
-
 ---
 
 ## License
