@@ -228,7 +228,7 @@ fun testExpenseInsertion() {
 
 ## Demonstration Video
 
-A comprehensive [video walkthrough]https://www.youtube.com/  showcases:
+A comprehensive [video walkthrough]https://youtu.be/b5HHN3lk0YQ showcases:
 
 1. User registration and login process.
 2. Creating expenses with photo attachments.
