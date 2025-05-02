@@ -17,6 +17,27 @@
 * Provide actionable insights via graphs, budgets, and category-wise spending analysis.
 
 ---
+##Screenshots
+![image](https://github.com/user-attachments/assets/71e3aee4-d378-4f0f-a62a-1270a94e7997)
+![image](https://github.com/user-attachments/assets/4c4db86f-2fbb-4e06-be2a-f468832389c9)
+![image](https://github.com/user-attachments/assets/f0dd214b-5eb7-499a-908b-4387e048eb69)
+![image](https://github.com/user-attachments/assets/dc10bdf0-840f-4aca-ae51-9efb707d4520)
+![image](https://github.com/user-attachments/assets/8a844bba-d3ca-4d38-aa3e-a3e5a55c3182)
+![image](https://github.com/user-attachments/assets/a25816f9-d3de-4b61-ac6c-cc9bd89f864b)
+![image](https://github.com/user-attachments/assets/f7174a2e-96e1-4f4a-9996-f183bebd726b)
+![image](https://github.com/user-attachments/assets/60aa112b-3a03-488d-beac-b42b1b7238ea)
+![image](https://github.com/user-attachments/assets/0b9691b5-0db7-41a5-b010-e3f0a4c4b618)
+![image](https://github.com/user-attachments/assets/824b8901-2c89-4e5a-8b88-2ff46e991dfd)
+
+
+
+
+
+
+
+
+
+
 
 ## Features
 
@@ -156,13 +177,6 @@ fun testExpenseInsertion() {
     assertEquals(1, expenses.size)
 }
 ```
-
-### Continuous Integration
-
-* Integrated GitHub Actions to automate testing on every push to the `main` branch.
-* Generated code coverage reports using JaCoCo.
-
----
 
 ## Demonstration Video
 
