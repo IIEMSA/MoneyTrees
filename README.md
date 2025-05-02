@@ -249,11 +249,3 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 **Contact**: \ST10380788@IMCONNECT.EDU.ZA/ST10361620@IMCONNECT.EDU.ZA/ST10369736@IMCONNECT.EDU.ZA | [GitHub Profile](https://github.com/IIEMSA/opsc6311-poe-part-2-group1-Lwandle-Chauke)
 **Submission**: This project is part of the Portfolio of Evidence (POE) for OPSC6311.
 
----
-
-Feel free to customize this `README.md` further to align with your specific project details and requirements.
-
-[1]: https://developer.android.com/training/data-storage/room/?utm_source=chatgpt.com "Save data in a local database using Room - Android Developers"
-[2]: https://code.tutsplus.com/add-charts-to-your-android-app-using-mpandroidchart--cms-23335t?utm_source=chatgpt.com "Add Charts to Your Android App Using MPAndroidChart"
-[3]: https://stackoverflow.com/questions/49799757/implementing-the-room-database-android?utm_source=chatgpt.com "Implementing the Room Database (Android) - Stack Overflow"
-[4]: https://github.com/PhilJay/MPAndroidChart?utm_source=chatgpt.com "GitHub - PhilJay/MPAndroidChart: A powerful Android chart view ..."
