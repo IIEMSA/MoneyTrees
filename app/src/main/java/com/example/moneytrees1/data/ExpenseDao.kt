@@ -19,8 +19,8 @@ interface ExpenseDao {
     @Query("SELECT SUM(amount) FROM expenses")
     fun getTotalExpenses(): Flow<Double>
 
-    @Query("SELECT * FROM expenses WHERE date BETWEEN :startDate AND :endDate ORDER BY date ASC")
-    fun getExpensesBetweenDates(startDate: String, endDate: String): List<ExpenseEntity>
+    @Query("SELECT * FROM expenses WHERE date BETWEEN :start AND :end ORDER BY date ASC")
+    suspend fun getExpensesBetweenDates(start: String, end: String): List<ExpenseEntity>
 
     @Query("SELECT * FROM expenses ORDER BY date DESC LIMIT 3")
     fun getRecentExpenses(): Flow<List<ExpenseEntity>>
