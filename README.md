@@ -32,7 +32,7 @@ The **Money Trees Budget App** is designed to:
 By using Money Trees, users can take charge of their money and make informed decisions that lead to greater financial freedom.
 
 ---
-##Screenshots
+## Screenshots of App
 ![image](https://github.com/user-attachments/assets/71e3aee4-d378-4f0f-a62a-1270a94e7997)
 ![image](https://github.com/user-attachments/assets/4c4db86f-2fbb-4e06-be2a-f468832389c9)
 ![image](https://github.com/user-attachments/assets/f0dd214b-5eb7-499a-908b-4387e048eb69)
