@@ -7,4 +7,29 @@
     <color name="colorPrimary">#FFA0BC</color>  <!-- Pink color matching your app -->
     <color name="colorPrimaryDark">#FB5D8F</color>  <!-- Darker pink -->
     <color name="colorAccent">#FF69B4</color>  <!-- Accent pink -->
+    <color name="grey">#808080</color>
+
+    <color name="cat1">#4285F4</color>
+    <color name="cat2">#EA4335</color>
+    <color name="cat3">#FBBC05</color>
+    <color name="cat4">#34A853</color>
+    <color name="cat5">#9C27B0</color>
+    <color name="cat6">#FF9800</color>
+    <color name="cat7">#00ACC1</color>
+    <color name="cat8">#F06292</color>
+    <color name="cat9">#607D8B</color>
+    <color name="cat10">#D4AF37</color>
+    <color name="cat11">#8BC34A</color>
+    <color name="cat12">#795548</color>
+    <color name="cat13">#CDDC39</color>
+    <color name="cat14">#3F51B5</color>
+    <color name="cat15">#FFEB3B</color>
+    <color name="cat16">#00C853</color>
+    <color name="cat17">#C51162</color>
+    <color name="cat18">#FF5722</color>
+    <color name="cat19">#A1887F</color>
+    <color name="cat20">#B71C1C</color>
+    <!-- already existing, for lines -->
+    <color name="red">#FF3030</color>
+    <color name="green">#2ECC40</color>
 </resources>

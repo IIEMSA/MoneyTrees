@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
     id("kotlin-parcelize")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -75,8 +76,16 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
     implementation ("com.github.bumptech.glide:glide:4.16.0")
+    implementation(libs.firebase.database)
     kapt ("com.github.bumptech.glide:compiler:4.16.0")
+
+
+    // For PDF generation
+    implementation("com.itextpdf:itext7-core:7.2.3")
+
 
     // Room
     implementation(libs.androidx.room.runtime)
@@ -88,7 +97,9 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata)
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:${libs.versions.lifecycle.get()}")
     implementation("androidx.lifecycle:lifecycle-common-java8:${libs.versions.lifecycle.get()}")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
 
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
     //password validation utility
     implementation("at.favre.lib:bcrypt:0.9.0")
 
@@ -108,9 +119,14 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${libs.versions.coroutines.get()}")
     androidTestImplementation("androidx.room:room-testing:${libs.versions.room.get()}")
+
+    //Firebase
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
 }
 
 kapt {
     correctErrorTypes = true
     useBuildCache = true
 }
+

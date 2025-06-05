@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 
 @Database(
     entities = [
@@ -12,9 +13,10 @@ import androidx.room.RoomDatabase
         CategoryEntity::class,
         ExpenseEntity::class
     ],
-    version = 4,
+    version = 8, // Incremented version
     exportSchema = false
 )
+@TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun userDao(): UserDao
@@ -33,7 +35,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "money_trees_db"
                 )
-                    .fallbackToDestructiveMigration()
+                    .fallbackToDestructiveMigration() // Use for development only
                     .build()
                 INSTANCE = instance
                 instance

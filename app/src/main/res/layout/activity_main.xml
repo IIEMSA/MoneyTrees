@@ -12,10 +12,10 @@
     <!-- Navigation Menu -->
     <LinearLayout
         android:id="@+id/navigation_menu"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#FFA0BC"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,9 +26,9 @@
             android:id="@+id/nav_menu"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:clickable="true"
             android:contentDescription="Menu"
-            android:src="@drawable/menu" />
+            android:src="@drawable/menu"
+            android:clickable="true" />
 
         <TextView
             android:id="@+id/tvWelcome"
@@ -42,115 +42,171 @@
             android:textStyle="bold" />
     </LinearLayout>
 
-    <!-- Budget Summary Title -->
+    <!-- Spending Goal Visual Bar Section -->
     <TextView
-        android:id="@+id/budget_summary_title"
+        android:id="@+id/goal_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Budget Summary"
+        android:text="Spending Goal Progress (Past Month)"
         android:textColor="#E91E63"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/navigation_menu"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/navigation_menu" />
-
-    <TextView
-        android:id="@+id/budget_summary_title2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="144dp"
-        android:text="Budget Summary Cards"
-        android:textColor="#E91E63"
-        android:textSize="20sp"
-        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/navigation_menu" />
+        android:layout_marginTop="8dp"/>
 
-    <ProgressBar
-        android:id="@+id/budget_progress"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+    <!-- Goal Bar Container Section -->
+    <LinearLayout
+        android:id="@+id/goal_bar_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/goal_info"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/budget_summary_title" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <!-- Spent/Remaining Row -->
+        <!-- Goal Bar with Min/Max Markers -->
+        <RelativeLayout
+            android:id="@+id/goal_bar_wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="16dp"
+            android:background="#DDD">
+
+            <View
+                android:id="@+id/goal_progress_fill"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="#7ad76c"/>
+
+            <View
+                android:id="@+id/min_goal_marker"
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="#2196F3"
+                android:visibility="invisible"/>
+
+            <View
+                android:id="@+id/max_goal_marker"
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="#F44336"
+                android:layout_alignParentEnd="true"
+                android:visibility="invisible"/>
+        </RelativeLayout>
+
+        <!-- Min, Max, YOU markers with values -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="6dp">
+
+            <TextView
+                android:id="@+id/tv_goal_min"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Min: R0.00"
+                android:textColor="#2196F3"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_goal_max"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="Max: R0.00"
+                android:textColor="#F44336"
+                android:textSize="12sp" />
+
+            <RelativeLayout
+                android:id="@+id/current_indicator_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true">
+
+                <TextView
+                    android:id="@+id/tv_goal_current"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="You: R0.00"
+                    android:textColor="#000"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <!-- Row: Spent and Remaining -->
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/spent_remaining_row"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/goal_bar_container"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/budget_progress">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
             android:id="@+id/tv_budget_spent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="Spent: R0.00"
             android:textAlignment="center"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:layout_weight="1"
+            android:textColor="#2E7D32"/>
 
         <TextView
             android:id="@+id/tv_budget_remaining"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="Remaining: R0.00"
             android:textAlignment="center"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:layout_weight="1"
+            android:textColor="#D84315"/>
     </LinearLayout>
 
     <!-- Total Expenses -->
     <TextView
         android:id="@+id/tvTotalExpenses"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="4dp"
+        android:text="Total Expenses: R0.00"
         android:textColor="#FF4081"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spent_remaining_row"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout"/>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- Recent Activity Title -->
-
-    <!-- RecyclerView for Recent Activity -->
-
-    <!-- SHOWS UP WHEN THE RECYCLER IS EMPTY-->
-
     <TextView
         android:id="@+id/recent_activity_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="244dp"
+        android:layout_marginTop="12dp"
         android:text="Recent Transactions"
         android:textColor="#E91E63"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintTop_toBottomOf="@id/tvTotalExpenses"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/budget_summary_title" />
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- RecyclerView for Recent Activity -->
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recent_activity_recycler"
-        android:layout_width="423dp"
-        android:layout_height="194dp"
+        android:layout_width="442dp"
+        android:layout_height="350dp"
         android:layout_marginTop="8dp"
         android:contentDescription="Recent transactions list"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.52"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/recent_activity_title" />
 
@@ -162,57 +218,27 @@
         android:textColor="#999999"
         android:textSize="16sp"
         android:visibility="gone"
+        android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@id/recent_activity_recycler"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="8dp" />
-
-
-    <!-- ScrollView for Expense Items -->
-
-    <TextView
-        android:id="@+id/txt_past_transactions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="284dp"
-        android:layout_marginBottom="172dp"
-        android:text="Past Transactions"
-        android:textColor="#333333"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/expense_list_container"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <ScrollView
-        android:id="@+id/scroll_expense_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/button_container"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout"
-        app:layout_constraintVertical_bias="0.723">
-
-    </ScrollView>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- Budget Summary Cards Row -->
 
-
-    <!-- Bottom Buttons -->
+    <!-- Bottom Button Container (if needed for FABs etc) -->
 
     <LinearLayout
         android:id="@+id/budget_summary_cards"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="16dp"
         android:gravity="center"
         android:orientation="horizontal"
         android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linearLayout">
+        app:layout_constraintTop_toBottomOf="@id/empty_recent_activity">
 
         <TextView
             android:id="@+id/budget_status"
@@ -223,7 +249,7 @@
             android:background="#ff79a3"
             android:gravity="center"
             android:padding="8dp"
-            android:text="Budget Type\nR0.00"
+            android:text="Budget Type\nNo Budget Set"
             android:textColor="#000"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -260,100 +286,11 @@
         android:id="@+id/button_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:gravity="center"
         android:orientation="horizontal"
+        android:gravity="center"
         android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <Button
-            android:id="@+id/btn_add_expense"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:backgroundTint="#FF69B4"
-            android:text="Add Expense"
-            android:textColor="#FFFFFF" />
-
-        <Button
-            android:id="@+id/btn_add_category"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_weight="1"
-            android:backgroundTint="#FF69B4"
-            android:text="Detailed Budget Summary"
-            android:textColor="#FFFFFF" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/expense_list_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="56dp"
-        android:orientation="vertical"
-        android:padding="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/button_container"
-        tools:layout_editor_absoluteX="0dp">
-
-        <!-- Example single expense layout -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:background="#FFFFFF"
-            android:elevation="2dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="12dp">
-
-            <ImageView
-                android:id="@+id/expense_image"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:background="@drawable/pink_circle_background"
-                android:padding="4dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_image_placeholder" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:paddingStart="12dp">
-
-                <TextView
-                    android:id="@+id/expense_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Expense Name"
-                    android:textColor="#FF69B4"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/expense_category"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Category"
-                    android:textColor="#A0527D"
-                    android:textSize="14sp" />
-
-                <TextView
-                    android:id="@+id/view_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="View Image"
-                    android:textColor="#FF69B4"
-                    android:textSize="14sp"
-                    android:textStyle="italic" />
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,106 +18,89 @@ import com.example.moneytrees1.ui.MainActivity.MenuItem
 
 class CategoryActivity : AppCompatActivity() {
 
-    // Side menu navigation options
     private val menuItems = listOf(
-        com.example.moneytrees1.ui.MainActivity.MenuItem("Home", MainActivity::class.java),
-        com.example.moneytrees1.ui.MainActivity.MenuItem(
-            "Dashboard",
-            DashboardActivity::class.java
-        ),
-        com.example.moneytrees1.ui.MainActivity.MenuItem("Profile", ProfileActivity::class.java),
-        com.example.moneytrees1.ui.MainActivity.MenuItem(
-            "Add Expense",
-            ExpenseActivity::class.java
-        ),
-        com.example.moneytrees1.ui.MainActivity.MenuItem(
-            "Budget Planner",
-            BudgetPlannerActivity::class.java
-        ),
-        com.example.moneytrees1.ui.MainActivity.MenuItem(
-            "Expense History",
-            ExpenseHistoryActivity::class.java
-        ),
-        com.example.moneytrees1.ui.MainActivity.MenuItem(
-            "Achievements",
-            AchievementsActivity::class.java
-        ),
-        com.example.moneytrees1.ui.MainActivity.MenuItem(
-            "Leaderboard",
-            LeaderboardActivity::class.java
-        ),
-        com.example.moneytrees1.ui.MainActivity.MenuItem("Game", GameActivity::class.java),
-        com.example.moneytrees1.ui.MainActivity.MenuItem(
-            "Add Category",
-            CategoryActivity::class.java
-        )
+        MenuItem("Home", MainActivity::class.java),
+        MenuItem("Dashboard", DashboardActivity::class.java),
+        MenuItem("Profile", ProfileActivity::class.java),
+        MenuItem("Add Expense", ExpenseActivity::class.java),
+        MenuItem("Budget Planner", BudgetPlannerActivity::class.java),
+        MenuItem("Expense History", ExpenseHistoryActivity::class.java),
+        MenuItem("Achievements", AchievementsActivity::class.java),
+        MenuItem("Leaderboard", LeaderboardActivity::class.java),
+        MenuItem("Game", GameActivity::class.java),
+        MenuItem("Add Category", CategoryActivity::class.java)
     )
+
+    private var userId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category)
 
-        // Initialize the UI elements
+        // Session: load ONLY from SharedPreferences
+        userId = getSharedPreferences("user_session", MODE_PRIVATE).getInt("USER_ID", -1)
+        if (userId == -1) {
+            Toast.makeText(this, "Invalid user session", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+            return
+        }
+
         val etCategoryName = findViewById<EditText>(R.id.et_category_name)
         val etCategoryAmount = findViewById<EditText>(R.id.et_category_amount)
         val btnSaveCategory = findViewById<Button>(R.id.btn_save_category)
 
-        // Button click listener
         btnSaveCategory.setOnClickListener {
             val name = etCategoryName.text.toString().trim()
             val amountString = etCategoryAmount.text.toString().trim()
 
-            // Check if the category name and amount are valid
             if (name.isNotBlank() && amountString.isNotBlank()) {
-                try {
-                    val amount = amountString.toDouble() // Convert amount to a number
-
-                    // Get the database instance
-                    val db = AppDatabase.getDatabase(applicationContext)
-
-                    CoroutineScope(Dispatchers.IO).launch {
-                        try {
-                            val category = CategoryEntity(name = name, amount = amount)
-                            db.categoryDao().insert(category)
-
-                            // 🔍 Optional: Fetch and log all categories
-                            val allCategories = db.categoryDao().getAllCategories()
-                            allCategories.forEach {
-                                println("Saved category: ${it.name} - Amount: ${it.amount}")
-                            }
-
+                val amount = amountString.toDoubleOrNull()
+                if (amount == null) {
+                    Toast.makeText(this, "Please enter a valid amount", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                CoroutineScope(Dispatchers.IO).launch {
+                    try {
+                        val db = AppDatabase.getDatabase(applicationContext)
+                        if (db.categoryDao().getCategoryByName(userId, name) != null) {
                             runOnUiThread {
                                 Toast.makeText(
                                     this@CategoryActivity,
-                                    "Category added successfully!",
+                                    "Category already exists!",
                                     Toast.LENGTH_SHORT
                                 ).show()
-                                finish()
                             }
-                        } catch (e: Exception) {
-                            runOnUiThread {
-                                Toast.makeText(
-                                    this@CategoryActivity,
-                                    "Error: ${e.message}",
-                                    Toast.LENGTH_LONG
-                                ).show()
-                            }
+                            return@launch
+                        }
+                        db.categoryDao().insert(CategoryEntity(userId = userId, name = name, amount = amount))
+                        runOnUiThread {
+                            Toast.makeText(
+                                this@CategoryActivity,
+                                "Category added successfully!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            finish()
+                        }
+                    } catch (e: Exception) {
+                        runOnUiThread {
+                            Toast.makeText(
+                                this@CategoryActivity,
+                                "Error: ${e.message}",
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
                     }
-
-                } catch (e: NumberFormatException) {
-                    // Show error if the amount is not a valid number
-                    Toast.makeText(this, "Please enter a valid amount", Toast.LENGTH_SHORT).show()
                 }
             } else {
-                // Show error if category name or amount is blank
-                Toast.makeText(this, "Please enter both category name and amount", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please enter both fields", Toast.LENGTH_SHORT).show()
             }
         }
+
+        setupNavigationListeners()
     }
 
     private fun setupNavigationListeners() {
-        // Side menu
         findViewById<ImageView>(R.id.nav_menu).setOnClickListener {
             showSideMenu()
         }
@@ -127,12 +110,12 @@ class CategoryActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setTitle("Menu Options")
             .setItems(menuItems.map { it.title }.toTypedArray()) { _, which ->
-                startActivity(Intent(this, menuItems[which].targetActivity))
+                val intent = Intent(this, menuItems[which].targetActivity)
+                startActivity(intent)
             }
             .setNegativeButton("Cancel", null)
             .show()
     }
 
-    // Simple data class for menu items
     data class MenuItem(val title: String, val targetActivity: Class<*>)
 }

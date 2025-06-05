@@ -6,11 +6,14 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "expenses")
 data class ExpenseEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    val userId: Int, // Add this field
     val name: String,
     val category: String,
     val amount: Double,
     val date: String,         // Should be in yyyy-MM-dd format
     val startTime: String,    // Consider using timestamp instead
     val endTime: String,      // Consider using timestamp instead
-    val imagePath: String?    // Nullable field
+    val description: String, // This should exist
+    val imagePath: String?   // Nullable field
+
 )

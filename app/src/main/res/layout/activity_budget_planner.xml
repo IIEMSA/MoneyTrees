@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFE0E2"
+    android:fillViewport="true"
     tools:context=".ui.BudgetPlannerActivity">
 
     <LinearLayout
@@ -42,8 +43,6 @@
                 android:textSize="34sp"
                 android:textStyle="bold" />
         </LinearLayout>
-
-        <!-- Title -->
 
         <!-- Monthly/Weekly Buttons -->
         <RadioGroup
@@ -100,124 +99,13 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <!-- Categories -->
-        <!-- Groceries -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="#FFF0F3">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Clothing"
-                    android:textColor="#D81B60"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/groceriesBudget"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Enter amount (R)"
-                    android:inputType="numberDecimal"
-                    android:backgroundTint="#FF80AB"
-                    android:textColor="#000000"
-                    android:textColorHint="#D81B60"
-                    android:padding="8dp" />
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <!-- Transport -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="#FFF0F3">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Medical Expenses"
-                    android:textColor="#D81B60"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/transportBudget"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Enter amount (R)"
-                    android:inputType="numberDecimal"
-                    android:backgroundTint="#FF80AB"
-                    android:textColor="#000000"
-                    android:textColorHint="#D81B60"
-                    android:padding="8dp" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- Entertainment -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="#FFF0F3">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Emergency Funds"
-                    android:textColor="#D81B60"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/entertainmentBudget"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Enter amount (R)"
-                    android:inputType="numberDecimal"
-                    android:backgroundTint="#FF80AB"
-                    android:textColor="#000000"
-                    android:textColorHint="#D81B60"
-                    android:padding="8dp" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
+        <!-- Categories Container -->
         <LinearLayout
             android:id="@+id/categoryContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="8dp" />
-
+            android:layout_marginTop="8dp"/>
 
         <!-- Add Category Button -->
         <Button
@@ -230,7 +118,7 @@
             android:text="Add Budget Category"
             android:textColor="#FFFFFF" />
 
-        <!-- Minimum Goal -->
+        <!-- Goals Section -->
         <EditText
             android:id="@+id/minimumGoal"
             android:layout_width="match_parent"
@@ -242,7 +130,6 @@
             android:padding="12dp"
             android:textColorHint="#D81B60" />
 
-        <!-- Maximum Goal -->
         <EditText
             android:id="@+id/maximumGoal"
             android:layout_width="match_parent"
@@ -254,7 +141,7 @@
             android:padding="12dp"
             android:textColorHint="#D81B60" />
 
-        <!-- Save Budget Button -->
+        <!-- Action Buttons -->
         <Button
             android:id="@+id/btnSaveBudget"
             android:layout_width="match_parent"
@@ -265,7 +152,17 @@
             android:text="Save Budget"
             android:textColor="#FFFFFF" />
 
-        <!-- Total Budget Display -->
+        <Button
+            android:id="@+id/btnClearBudgets"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#F06292"
+            android:padding="12dp"
+            android:text="Clear Budgets"
+            android:textColor="#FFFFFF" />
+
+        <!-- Progress Section -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -296,20 +193,20 @@
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:layout_marginTop="20dp"
-            android:progressDrawable="@drawable/pink_progress"
             android:max="100"
             android:progress="0"
+            android:progressDrawable="@drawable/pink_progress"
             style="?android:attr/progressBarStyleHorizontal" />
 
         <TextView
             android:id="@+id/progressPercentageText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
             android:text="0%"
             android:textColor="#FF4081"
-            android:textSize="16sp"
-            android:layout_marginTop="8dp"
-            android:layout_gravity="center_horizontal"/>
+            android:textSize="16sp" />
 
     </LinearLayout>
 </ScrollView>

@@ -22,7 +22,8 @@ bcrypt = "0.10.2"           # Password hashing library
 # Testing
 junit = "4.13.2"            # Unit testing
 junitVersion = "1.2.0"      # Android JUnit runner
-espressoCore = "3.6.0"      # Espresso UI testing
+espressoCore = "3.6.0"
+firebaseDatabase = "21.0.0"      # Espresso UI testing
 
 [libraries]
 # Android Core Libraries
@@ -54,6 +55,7 @@ bcrypt = { group = "at.favre.lib", name = "bcrypt", version.ref = "bcrypt" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+firebase-database = { group = "com.google.firebase", name = "firebase-database", version.ref = "firebaseDatabase" }
 
 [plugins]
 # Plugin versions

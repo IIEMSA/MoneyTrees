@@ -24,9 +24,9 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        Log.d(TAG, "Activity created")
 
-        // Initialize ViewModel with the app repository
+        Log.d(TAG, "LoginActivity created")
+
         val app = application as MyApplication
         userViewModel = ViewModelProvider(
             this,
@@ -43,13 +43,14 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.tvRegister.setOnClickListener {
-            Log.d(TAG, "Register text clicked")
-            navigateToRegister()
+            Log.d(TAG, "Register link clicked")
+            startActivity(Intent(this, RegisterActivity::class.java))
+            finish()
         }
 
         binding.tvForgotPassword.setOnClickListener {
             Log.d(TAG, "Forgot password clicked")
-            showForgotPassword()
+            startActivity(Intent(this, ForgotPasswordActivity::class.java))
         }
     }
 
@@ -57,73 +58,54 @@ class LoginActivity : AppCompatActivity() {
         val username = binding.etUsername.text.toString().trim()
         val password = binding.etPassword.text.toString().trim()
 
-        Log.d(TAG, "Attempting login for user: $username")
-
         when {
             username.isEmpty() -> {
                 binding.etUsername.error = "Username required"
-                Log.w(TAG, "Empty username")
+                Log.w(TAG, "Username is empty")
             }
             password.isEmpty() -> {
                 binding.etPassword.error = "Password required"
-                Log.w(TAG, "Empty password")
+                Log.w(TAG, "Password is empty")
             }
             else -> authenticateUser(username, password)
         }
     }
 
     private fun authenticateUser(username: String, password: String) {
-        Log.d(TAG, "Authenticating user: $username")
         binding.btnLogin.isEnabled = false
+        Log.d(TAG, "Authenticating user: $username")
 
         userViewModel.loginUser(
             username = username,
             password = password,
             onSuccess = { user ->
-                Log.i(TAG, "Login successful for user: ${user.username}")
+                Log.i(TAG, "Login successful for user: ${user.username} (userId=${user.id})")
                 runOnUiThread {
-                    // Save user session
-                    saveUserSession(user.id)  // <-- Add this
-                    showToast("Welcome ${user.fullName}!")
-                    navigateToMain(user.id, user.fullName)
+                    saveUserSession(user.id, user.fullName)
+                    Toast.makeText(this, "Welcome ${user.fullName}!", Toast.LENGTH_SHORT).show()
+                    navigateToMain()
                 }
             },
             onFailure = { error ->
-                Log.e(TAG, "Login error: $error")
+                Log.e(TAG, "Login failed: $error")
                 runOnUiThread {
                     binding.btnLogin.isEnabled = true
-                    showToast(error)
+                    Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
                 }
             }
         )
     }
 
-    private fun saveUserSession(userId: Int) {
-        val sharedPref = getSharedPreferences("user_session", MODE_PRIVATE)
-        with(sharedPref.edit()) {
-            putInt("user_id", userId)
-            apply()
-        }
-        Log.d(TAG, "User session saved for ID: $userId")
+    private fun saveUserSession(userId: Int, fullName: String) {
+        getSharedPreferences("user_session", MODE_PRIVATE).edit()
+            .putInt("USER_ID", userId)
+            .putString("USERNAME", fullName)
+            .apply()
+        Log.d(TAG, "User session saved for userId: $userId, fullName: $fullName")
     }
 
-    private fun navigateToMain(userId: Int, username: String) {
-        Log.d(TAG, "Navigating to MainActivity with userId: $userId")
-        MainActivity.start(this, userId, username) // Use the new clean method
+    private fun navigateToMain() {
+        startActivity(Intent(this, MainActivity::class.java))
         finish()
-    }
-
-    private fun navigateToRegister() {
-        Log.d(TAG, "Navigating to RegisterActivity")
-        startActivity(Intent(this, RegisterActivity::class.java))
-    }
-
-    private fun showForgotPassword() {
-        Log.d(TAG, "Showing forgot password message")
-        showToast("Password reset feature coming soon")
-    }
-
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 }

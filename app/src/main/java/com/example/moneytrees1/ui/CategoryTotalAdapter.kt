@@ -8,33 +8,36 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.moneytrees1.R
 import java.text.NumberFormat
 
-class CategoryTotalAdapter(private val numberFormat: NumberFormat) :
-    RecyclerView.Adapter<CategoryTotalAdapter.ViewHolder>() {
+class CategoryTotalAdapter(
+    private val currencyFormat: NumberFormat
+) : RecyclerView.Adapter<CategoryTotalAdapter.TotalViewHolder>() {
 
-    private val categoryTotals = mutableListOf<Pair<String, Double>>()
+    private val data = mutableListOf<Pair<String, Double>>()
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val categoryName: TextView = itemView.findViewById(R.id.tv_category_name)
-        val totalAmount: TextView = itemView.findViewById(R.id.tv_total_amount)
+    fun updateData(categoryTotals: Map<String, Double>) {
+        data.clear()
+        data.addAll(categoryTotals.entries.map { it.key to it.value })
+        notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TotalViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_category_total, parent, false)
-        return ViewHolder(view)
+        return TotalViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val (category, total) = categoryTotals[position]
+    override fun getItemCount() = data.size
+
+    override fun onBindViewHolder(holder: TotalViewHolder, position: Int) {
+        val (category, total) = data[position]
         holder.categoryName.text = category
-        holder.totalAmount.text = numberFormat.format(total)
+        holder.totalAmount.text = currencyFormat.format(total)
+        holder.categoryTotalType.text = "Category Total"  // static, or you can remove/set to "" if you wish
     }
 
-    override fun getItemCount(): Int = categoryTotals.size
-
-    fun updateData(newData: Map<String, Double>) {
-        categoryTotals.clear()
-        categoryTotals.addAll(newData.toList())
-        notifyDataSetChanged()
+    class TotalViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val categoryName: TextView = view.findViewById(R.id.tv_category_name)
+        val totalAmount: TextView = view.findViewById(R.id.tv_total_amount)
+        val categoryTotalType: TextView = view.findViewById(R.id.tv_category_total)
     }
 }

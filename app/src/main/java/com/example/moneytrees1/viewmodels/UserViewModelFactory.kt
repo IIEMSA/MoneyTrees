@@ -5,7 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.moneytrees1.data.UserRepository
 
 /**
- * Factory for injecting the UserRepository dependency into the ViewModel.
+
+Factory for injecting the UserRepository dependency into the ViewModel.
  */
 class UserViewModelFactory(private val userRepository: UserRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

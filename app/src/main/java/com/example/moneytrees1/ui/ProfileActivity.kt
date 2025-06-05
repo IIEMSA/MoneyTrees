@@ -18,40 +18,17 @@ import com.example.moneytrees1.viewmodels.UserViewModelFactory
 
 class ProfileActivity : AppCompatActivity() {
 
-    // Side menu navigation options
-    // Side menu navigation options
     private val menuItems = listOf(
-        com.example.moneytrees1.ui.MainActivity.MenuItem("Home", MainActivity::class.java),
-        com.example.moneytrees1.ui.MainActivity.MenuItem(
-            "Dashboard",
-            DashboardActivity::class.java
-        ),
-        com.example.moneytrees1.ui.MainActivity.MenuItem("Profile", ProfileActivity::class.java),
-        com.example.moneytrees1.ui.MainActivity.MenuItem(
-            "Add Expense",
-            ExpenseActivity::class.java
-        ),
-        com.example.moneytrees1.ui.MainActivity.MenuItem(
-            "Budget Planner",
-            BudgetPlannerActivity::class.java
-        ),
-        com.example.moneytrees1.ui.MainActivity.MenuItem(
-            "Expense History",
-            ExpenseHistoryActivity::class.java
-        ),
-        com.example.moneytrees1.ui.MainActivity.MenuItem(
-            "Achievements",
-            AchievementsActivity::class.java
-        ),
-        com.example.moneytrees1.ui.MainActivity.MenuItem(
-            "Leaderboard",
-            LeaderboardActivity::class.java
-        ),
-        com.example.moneytrees1.ui.MainActivity.MenuItem("Game", GameActivity::class.java),
-        com.example.moneytrees1.ui.MainActivity.MenuItem(
-            "Add Category",
-            CategoryActivity::class.java
-        )
+        MenuItem("Home", MainActivity::class.java),
+        MenuItem("Dashboard", DashboardActivity::class.java),
+        MenuItem("Profile", ProfileActivity::class.java),
+        MenuItem("Add Expense", ExpenseActivity::class.java),
+        MenuItem("Budget Planner", BudgetPlannerActivity::class.java),
+        MenuItem("Expense History", ExpenseHistoryActivity::class.java),
+        MenuItem("Achievements", AchievementsActivity::class.java),
+        MenuItem("Leaderboard", LeaderboardActivity::class.java),
+        MenuItem("Game", GameActivity::class.java),
+        MenuItem("Add Category", CategoryActivity::class.java)
     )
 
     private lateinit var binding: ActivityProfileBinding
@@ -61,9 +38,7 @@ class ProfileActivity : AppCompatActivity() {
 
     companion object {
         private const val TAG = "ProfileActivity"
-        const val EXTRA_USER_ID = "USER_ID"
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,27 +52,23 @@ class ProfileActivity : AppCompatActivity() {
             UserViewModelFactory(app.userRepository)
         )[UserViewModel::class.java]
 
-        var userId = intent.getIntExtra(EXTRA_USER_ID, -1)
-
-        // Fallback to shared preferences if ID not found in intent
-        if (userId == -1) {
-            userId = getUserIdFromSession() // You need to implement this
-        }
-
+        // SESSION: Get userId ONLY from SharedPreferences
+        val userId = getUserIdFromSession()
         if (userId == -1) {
             Toast.makeText(this, "User not authenticated", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
             return
         }
 
         loadUserData(userId)
         setupClickListeners()
+        setupNavigationListeners()
     }
 
-    // Add this function to get user ID from shared preferences
     private fun getUserIdFromSession(): Int {
         val sharedPref = getSharedPreferences("user_session", MODE_PRIVATE)
-        return sharedPref.getInt("user_id", -1) // Returns -1 if not found
+        return sharedPref.getInt("USER_ID", -1) // Must match all other activities
     }
 
     private fun loadUserData(userId: Int) {
@@ -125,7 +96,6 @@ class ProfileActivity : AppCompatActivity() {
             }
         )
     }
-
 
     private fun setupClickListeners() {
         binding.btnEditProfile.setOnClickListener {
@@ -211,15 +181,23 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun logout() {
-        startActivity(Intent(this, LoginActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        })
-        finish() // finish after starting new activity
+        // Clear the session
+        val prefs = getSharedPreferences("user_session", MODE_PRIVATE)
+        prefs.edit().clear().apply()
+
+        // Optional: show a brief message
+        Toast.makeText(this, "Logged out!", Toast.LENGTH_SHORT).show()
+
+        // Go to login screen and clear the activity back stack
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
     }
 
+    // --- Side menu code ---
     private fun setupNavigationListeners() {
-        // Side menu
-        findViewById<ImageView>(R.id.nav_menu).setOnClickListener {
+        findViewById<ImageView>(R.id.nav_menu)?.setOnClickListener {
             showSideMenu()
         }
     }
@@ -234,6 +212,5 @@ class ProfileActivity : AppCompatActivity() {
             .show()
     }
 
-    // Simple data class for menu items
     data class MenuItem(val title: String, val targetActivity: Class<*>)
 }

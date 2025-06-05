@@ -4,4 +4,7 @@
     <dimen name="budget_card_corner_radius">8dp</dimen>
     <dimen name="budget_card_elevation">4dp</dimen>
     <dimen name="budget_summary_margin">16dp</dimen>
+    <dimen name="goal_bar_height">16dp</dimen>
+    <dimen name="arrow_size">24dp</dimen>
+    <dimen name="current_indicator_spacing">4dp</dimen>
 </resources>

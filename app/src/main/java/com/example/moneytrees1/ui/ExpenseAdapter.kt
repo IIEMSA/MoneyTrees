@@ -18,7 +18,7 @@ class ExpenseAdapter(private val currencyFormat: NumberFormat) :
     ListAdapter<ExpenseEntity, ExpenseAdapter.ViewHolder>(DiffCallback()) {
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val name: TextView = view.findViewById(R.id.tv_expense_name)
+        val description: TextView = view.findViewById(R.id.tv_expense_name) // Changed from name to description
         val amount: TextView = view.findViewById(R.id.tv_amount)
         val category: TextView = view.findViewById(R.id.tv_category)
         val date: TextView = view.findViewById(R.id.tv_date)
@@ -34,7 +34,8 @@ class ExpenseAdapter(private val currencyFormat: NumberFormat) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val expense = getItem(position)
         holder.apply {
-            name.text = expense.name
+            // Use description instead of name
+            description.text = expense.description ?: "No description"
             amount.text = currencyFormat.format(expense.amount)
             category.text = expense.category
             date.text = expense.date
