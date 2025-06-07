@@ -11,9 +11,10 @@ import androidx.room.TypeConverters
         User::class,
         Budget::class,
         CategoryEntity::class,
-        ExpenseEntity::class
+        ExpenseEntity::class,
+        NotificationEntity::class
     ],
-    version = 8, // Incremented version
+    version = 9, // Incremented version
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -23,6 +24,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun budgetDao(): BudgetDao
     abstract fun categoryDao(): CategoryDao
     abstract fun expenseDao(): ExpenseDao
+    abstract fun notificationDao(): NotificationDao
 
     companion object {
         @Volatile

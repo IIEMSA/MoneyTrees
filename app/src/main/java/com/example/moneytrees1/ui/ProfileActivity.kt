@@ -12,7 +12,6 @@ import com.example.moneytrees1.MyApplication
 import com.example.moneytrees1.R
 import com.example.moneytrees1.data.User
 import com.example.moneytrees1.databinding.ActivityProfileBinding
-import com.example.moneytrees1.ui.MainActivity.MenuItem
 import com.example.moneytrees1.viewmodels.UserViewModel
 import com.example.moneytrees1.viewmodels.UserViewModelFactory
 
@@ -21,13 +20,14 @@ class ProfileActivity : AppCompatActivity() {
     private val menuItems = listOf(
         MenuItem("Home", MainActivity::class.java),
         MenuItem("Dashboard", DashboardActivity::class.java),
-        MenuItem("Profile", ProfileActivity::class.java),
         MenuItem("Add Expense", ExpenseActivity::class.java),
         MenuItem("Budget Planner", BudgetPlannerActivity::class.java),
         MenuItem("Expense History", ExpenseHistoryActivity::class.java),
         MenuItem("Achievements", AchievementsActivity::class.java),
         MenuItem("Leaderboard", LeaderboardActivity::class.java),
         MenuItem("Game", GameActivity::class.java),
+        MenuItem("Settings Activity", SettingsActivity::class.java),
+
         MenuItem("Add Category", CategoryActivity::class.java)
     )
 
@@ -45,6 +45,10 @@ class ProfileActivity : AppCompatActivity() {
         binding = ActivityProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
         Log.d(TAG, "Activity created")
+
+        // Set password input type to masked by default
+        binding.etPassword.inputType =
+            android.text.InputType.TYPE_CLASS_TEXT or android.text.InputType.TYPE_TEXT_VARIATION_PASSWORD
 
         val app = application as MyApplication
         userViewModel = ViewModelProvider(

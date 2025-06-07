@@ -21,6 +21,7 @@ class NavigationActivity : AppCompatActivity() {
         val button6 = findViewById<Button>(R.id.button6) // Leaderboard
         val button7 = findViewById<Button>(R.id.button7) // Achievements
         val button8 = findViewById<Button>(R.id.button8) // Game
+        val button9 = findViewById<Button>(R.id.button9) // Settings
 
         // Set click listeners to navigate to each corresponding activity
         button3.setOnClickListener {
@@ -45,6 +46,10 @@ class NavigationActivity : AppCompatActivity() {
 
         button8.setOnClickListener {
             startActivity(Intent(this, LeaderboardActivity::class.java))
+        }
+
+        button9.setOnClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java))
         }
     }
 }

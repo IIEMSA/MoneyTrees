@@ -10,11 +10,13 @@ import com.example.moneytrees1.MyApplication
 import com.example.moneytrees1.databinding.ActivityLoginBinding
 import com.example.moneytrees1.viewmodels.UserViewModel
 import com.example.moneytrees1.viewmodels.UserViewModelFactory
+import com.google.firebase.auth.FirebaseAuth
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var userViewModel: UserViewModel
+    private lateinit var firebaseAuth: FirebaseAuth
 
     companion object {
         private const val TAG = "LoginActivity"
@@ -25,7 +27,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        Log.d(TAG, "LoginActivity created")
+        firebaseAuth = FirebaseAuth.getInstance()
 
         val app = application as MyApplication
         userViewModel = ViewModelProvider(
@@ -38,19 +40,17 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setupClickListeners() {
         binding.btnLogin.setOnClickListener {
-            Log.d(TAG, "Login button clicked")
             attemptLogin()
         }
 
         binding.tvRegister.setOnClickListener {
-            Log.d(TAG, "Register link clicked")
             startActivity(Intent(this, RegisterActivity::class.java))
             finish()
         }
 
         binding.tvForgotPassword.setOnClickListener {
-            Log.d(TAG, "Forgot password clicked")
             startActivity(Intent(this, ForgotPasswordActivity::class.java))
+            finish()
         }
     }
 
@@ -61,11 +61,9 @@ class LoginActivity : AppCompatActivity() {
         when {
             username.isEmpty() -> {
                 binding.etUsername.error = "Username required"
-                Log.w(TAG, "Username is empty")
             }
             password.isEmpty() -> {
                 binding.etPassword.error = "Password required"
-                Log.w(TAG, "Password is empty")
             }
             else -> authenticateUser(username, password)
         }
@@ -73,28 +71,47 @@ class LoginActivity : AppCompatActivity() {
 
     private fun authenticateUser(username: String, password: String) {
         binding.btnLogin.isEnabled = false
-        Log.d(TAG, "Authenticating user: $username")
+        val firebaseAuth = FirebaseAuth.getInstance()
 
-        userViewModel.loginUser(
+        userViewModel.getUserByUsername(
             username = username,
-            password = password,
-            onSuccess = { user ->
-                Log.i(TAG, "Login successful for user: ${user.username} (userId=${user.id})")
-                runOnUiThread {
-                    saveUserSession(user.id, user.fullName)
-                    Toast.makeText(this, "Welcome ${user.fullName}!", Toast.LENGTH_SHORT).show()
-                    navigateToMain()
+            onResult = { user ->
+                if (user == null) {
+                    runOnUiThread {
+                        binding.btnLogin.isEnabled = true
+                        Toast.makeText(this, "User not found", Toast.LENGTH_SHORT).show()
+                    }
+                    // No return needed here! Just exit the lambda.
+                } else {
+                    // Firebase sign-in with user's email
+                    firebaseAuth.signInWithEmailAndPassword(user.email, password)
+                        .addOnSuccessListener {
+                            Log.i(TAG, "Firebase login successful for user: ${user.email}")
+                            runOnUiThread {
+                                saveUserSession(user.id, user.fullName)
+                                Toast.makeText(this, "Welcome ${user.fullName}!", Toast.LENGTH_SHORT).show()
+                                navigateToMain()
+                            }
+                        }
+                        .addOnFailureListener { e ->
+                            Log.e(TAG, "Firebase login failed: ${e.message}")
+                            runOnUiThread {
+                                binding.btnLogin.isEnabled = true
+                                Toast.makeText(this, "Login failed: ${e.message}", Toast.LENGTH_SHORT).show()
+                            }
+                        }
                 }
             },
-            onFailure = { error ->
-                Log.e(TAG, "Login failed: $error")
+            onError = { error ->
+                Log.e(TAG, "Error fetching user by username: $error")
                 runOnUiThread {
                     binding.btnLogin.isEnabled = true
-                    Toast.makeText(this, error, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Login error: $error", Toast.LENGTH_SHORT).show()
                 }
             }
         )
     }
+
 
     private fun saveUserSession(userId: Int, fullName: String) {
         getSharedPreferences("user_session", MODE_PRIVATE).edit()

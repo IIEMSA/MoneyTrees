@@ -16,7 +16,6 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         javaCompileOptions {
@@ -69,64 +68,59 @@ android {
 }
 
 dependencies {
-    // Core AndroidX
+    // --- AndroidX Core ---
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
 
-    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+    // --- Glide ---
+    implementation(libs.glide)
+    kapt(libs.glide.compiler)
 
-    implementation ("com.github.bumptech.glide:glide:4.16.0")
-    implementation(libs.firebase.database)
-    kapt ("com.github.bumptech.glide:compiler:4.16.0")
+    // --- Firebase (all managed by BoM) ---
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+    // KTX artifacts with no explicit version:
+    implementation("com.google.firebase:firebase-analytics-ktx")
+    implementation("com.google.firebase:firebase-auth-ktx")
+    implementation("com.google.firebase:firebase-firestore-ktx")
+    implementation("com.google.firebase:firebase-storage-ktx")
+    implementation("com.google.firebase:firebase-database-ktx")  // <— now BOM‐managed
 
-
-    // For PDF generation
-    implementation("com.itextpdf:itext7-core:7.2.3")
-
-
-    // Room
+    // --- Room ---
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     kapt(libs.androidx.room.compiler)
 
-    // Lifecycle
+    // --- Lifecycle ---
     implementation(libs.androidx.lifecycle.viewmodel)
     implementation(libs.androidx.lifecycle.livedata)
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:${libs.versions.lifecycle.get()}")
     implementation("androidx.lifecycle:lifecycle-common-java8:${libs.versions.lifecycle.get()}")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
 
-    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
-    //password validation utility
-    implementation("at.favre.lib:bcrypt:0.9.0")
-
-    // Coroutines
+    // --- Coroutines ---
     implementation(libs.kotlinx.coroutines)
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${libs.versions.coroutines.get()}")
 
-    // Security
+    // --- Security / Bcrypt ---
     implementation(libs.bcrypt)
     implementation("androidx.security:security-crypto:1.1.0-alpha06")
 
-    // MPAndroidChart (✅ Fixed dependency)
+    // --- MPAndroidChart ---
     implementation("com.github.PhilJay:MPAndroidChart:3.1.0")
 
-    // Testing
+    // --- PDF (iText) ---
+    implementation("com.itextpdf:itext7-core:7.2.3")
+
+    // --- Testing ---
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:${libs.versions.coroutines.get()}")
     androidTestImplementation("androidx.room:room-testing:${libs.versions.room.get()}")
-
-    //Firebase
-    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
-    implementation("com.google.firebase:firebase-analytics-ktx")
 }
 
 kapt {
     correctErrorTypes = true
     useBuildCache = true
 }
-

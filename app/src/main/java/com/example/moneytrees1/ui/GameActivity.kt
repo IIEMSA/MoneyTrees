@@ -10,39 +10,18 @@ import com.example.moneytrees1.ui.MainActivity.MenuItem
 
 class GameActivity : AppCompatActivity() {
 
-    // Side menu navigation options
+    // 📋 Menu items for the side menu navigation
     private val menuItems = listOf(
-        com.example.moneytrees1.ui.MainActivity.MenuItem("Home", MainActivity::class.java),
-        com.example.moneytrees1.ui.MainActivity.MenuItem(
-            "Dashboard",
-            DashboardActivity::class.java
-        ),
-        com.example.moneytrees1.ui.MainActivity.MenuItem("Profile", ProfileActivity::class.java),
-        com.example.moneytrees1.ui.MainActivity.MenuItem(
-            "Add Expense",
-            ExpenseActivity::class.java
-        ),
-        com.example.moneytrees1.ui.MainActivity.MenuItem(
-            "Budget Planner",
-            BudgetPlannerActivity::class.java
-        ),
-        com.example.moneytrees1.ui.MainActivity.MenuItem(
-            "Expense History",
-            ExpenseHistoryActivity::class.java
-        ),
-        com.example.moneytrees1.ui.MainActivity.MenuItem(
-            "Achievements",
-            AchievementsActivity::class.java
-        ),
-        com.example.moneytrees1.ui.MainActivity.MenuItem(
-            "Leaderboard",
-            LeaderboardActivity::class.java
-        ),
-        com.example.moneytrees1.ui.MainActivity.MenuItem("Game", GameActivity::class.java),
-        com.example.moneytrees1.ui.MainActivity.MenuItem(
-            "Add Category",
-            CategoryActivity::class.java
-        )
+        MainActivity.MenuItem("Home", MainActivity::class.java),
+        MainActivity.MenuItem("Dashboard", DashboardActivity::class.java),
+        MainActivity.MenuItem("Profile", ProfileActivity::class.java),
+        MainActivity.MenuItem("Add Expense", ExpenseActivity::class.java),
+        MainActivity.MenuItem("Budget Planner", BudgetPlannerActivity::class.java),
+        MainActivity.MenuItem("Expense History", ExpenseHistoryActivity::class.java),
+        MainActivity.MenuItem("Achievements", AchievementsActivity::class.java),
+        MainActivity.MenuItem("Leaderboard", LeaderboardActivity::class.java),
+        MainActivity.MenuItem("Game", GameActivity::class.java),
+        MainActivity.MenuItem("Add Category", CategoryActivity::class.java)
     )
 
 
@@ -51,8 +30,9 @@ class GameActivity : AppCompatActivity() {
         setContentView(R.layout.activity_game)
     }
 
+    // Setup navigation menu items click listeners
     private fun setupNavigationListeners() {
-        // Side menu
+        // ☰ Show side menu with options
         findViewById<ImageView>(R.id.nav_menu).setOnClickListener {
             showSideMenu()
         }
@@ -62,12 +42,13 @@ class GameActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setTitle("Menu Options")
             .setItems(menuItems.map { it.title }.toTypedArray()) { _, which ->
-                startActivity(Intent(this, menuItems[which].targetActivity))
+                val intent = Intent(this, menuItems[which].targetActivity)
+                startActivity(intent)
             }
             .setNegativeButton("Cancel", null)
             .show()
     }
 
-    // Simple data class for menu items
+    // 🗂 Data class for menu items
     data class MenuItem(val title: String, val targetActivity: Class<*>)
 }

@@ -14,33 +14,36 @@ import com.example.moneytrees1.R
 import com.example.moneytrees1.data.ExpenseEntity
 import java.text.NumberFormat
 
+// Adapter for showing list of expenses in RecyclerView
 class ExpenseAdapter(private val currencyFormat: NumberFormat) :
     ListAdapter<ExpenseEntity, ExpenseAdapter.ViewHolder>(DiffCallback()) {
 
+    // ViewHolder holds references to item views
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val description: TextView = view.findViewById(R.id.tv_expense_name) // Changed from name to description
-        val amount: TextView = view.findViewById(R.id.tv_amount)
-        val category: TextView = view.findViewById(R.id.tv_category)
-        val date: TextView = view.findViewById(R.id.tv_date)
-        val image: ImageView = view.findViewById(R.id.iv_expense_image)
+        val description: TextView = view.findViewById(R.id.tv_expense_name) // Expense description
+        val amount: TextView = view.findViewById(R.id.tv_amount)            // Formatted amount
+        val category: TextView = view.findViewById(R.id.tv_category)        // Expense category
+        val date: TextView = view.findViewById(R.id.tv_date)                // Expense date
+        val image: ImageView = view.findViewById(R.id.iv_expense_image)     // Optional expense image
     }
 
+    // Inflate the layout and create ViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_expense, parent, false)
         return ViewHolder(view)
     }
 
+    // Bind data from ExpenseEntity to views
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val expense = getItem(position)
         holder.apply {
-            // Use description instead of name
             description.text = expense.description ?: "No description"
             amount.text = currencyFormat.format(expense.amount)
             category.text = expense.category
             date.text = expense.date
 
-            // Handle image loading safely
+            // Load image if path is valid, else hide image view
             expense.imagePath?.let { path ->
                 if (path.isNotBlank()) {
                     image.visibility = View.VISIBLE
@@ -61,13 +64,12 @@ class ExpenseAdapter(private val currencyFormat: NumberFormat) :
         }
     }
 
+    // Efficiently update list using DiffUtil callbacks
     class DiffCallback : DiffUtil.ItemCallback<ExpenseEntity>() {
-        override fun areItemsTheSame(oldItem: ExpenseEntity, newItem: ExpenseEntity): Boolean {
-            return oldItem.id == newItem.id
-        }
+        override fun areItemsTheSame(oldItem: ExpenseEntity, newItem: ExpenseEntity) =
+            oldItem.id == newItem.id
 
-        override fun areContentsTheSame(oldItem: ExpenseEntity, newItem: ExpenseEntity): Boolean {
-            return oldItem == newItem
-        }
+        override fun areContentsTheSame(oldItem: ExpenseEntity, newItem: ExpenseEntity) =
+            oldItem == newItem
     }
 }

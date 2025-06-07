@@ -1,5 +1,6 @@
 package com.example.moneytrees1.ui
 
+// 📱 Android Framework
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -7,6 +8,8 @@ import android.util.Log
 import android.view.View
 import android.widget.RelativeLayout
 import android.widget.Toast
+
+// 🧩 AndroidX Libraries
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +17,8 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+
+// 🏠 Application & Data
 import com.example.moneytrees1.MyApplication
 import com.example.moneytrees1.data.Budget
 import com.example.moneytrees1.databinding.ActivityMainBinding
@@ -21,13 +26,20 @@ import com.example.moneytrees1.viewmodels.BudgetViewModel
 import com.example.moneytrees1.viewmodels.BudgetViewModelFactory
 import com.example.moneytrees1.viewmodels.ExpenseViewModel
 import com.example.moneytrees1.viewmodels.ExpenseViewModelFactory
+
+// 📊 Firebase Analytics
 import com.google.firebase.analytics.FirebaseAnalytics
+
+// ⏳ Coroutines
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
+// 🗓 Utilities & Formatting
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,6 +53,7 @@ class MainActivity : AppCompatActivity() {
         MenuItem("Achievements", AchievementsActivity::class.java),
         MenuItem("Leaderboard", LeaderboardActivity::class.java),
         MenuItem("Game", GameActivity::class.java),
+        MenuItem("Settings", SettingsActivity::class.java),
         MenuItem("Add Category", CategoryActivity::class.java)
     )
 
@@ -52,15 +65,22 @@ class MainActivity : AppCompatActivity() {
     private var userId: Int = -1
     private var username: String = "User"
 
+    // Firebase Analytics instance
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
+
     companion object {
         private const val TAG = "MainActivity"
 
         private fun formatCurrency(amount: Double): String {
-            val zarFormat = NumberFormat.getNumberInstance(Locale("en", "ZA")).apply {
+            val prefs = MyApplication.instance.getSharedPreferences("AppPrefs", MODE_PRIVATE)
+            val currencyCode = prefs.getString("currency_code", "ZAR") ?: "ZAR"
+            val currency = Currency.getInstance(currencyCode)
+            val numberFormat = NumberFormat.getCurrencyInstance(Locale.getDefault()).apply {
+                this.currency = currency
                 maximumFractionDigits = 2
                 minimumFractionDigits = 2
             }
-            return "R${zarFormat.format(amount)}"
+            return numberFormat.format(amount)
         }
     }
 
@@ -70,9 +90,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //firebase
-        val analytics = FirebaseAnalytics.getInstance(this)
-        analytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, null)
+        // Initialize Firebase Analytics
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this)
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, null)
 
         // SESSION: Load only from SharedPreferences, ignore all intent extras
         val prefs = getSharedPreferences("user_session", MODE_PRIVATE)
@@ -314,6 +334,23 @@ class MainActivity : AppCompatActivity() {
         // Add similar listeners for other buttons if needed—no extras needed!
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "Refreshing UI with updated currency preferences.")
+
+        // Re-apply formatting to displayed fields using the latest currency symbol
+        val totalExpenses = expenseViewModel.totalExpenses.value ?: 0.0
+        binding.tvTotalExpenses.text = "Total Expenses: ${formatCurrency(totalExpenses)}"
+
+        val totalSpent = budgetViewModel.totalSpent.value ?: 0.0
+        binding.tvBudgetSpent.text = "Spent: ${formatCurrency(totalSpent)}"
+        updateRemainingBudget(totalSpent)
+
+        currentBudget?.let { updateBudgetDisplay(it) }
+
+        updateGoalBar()
+    }
+
     private fun showSideMenu() {
         AlertDialog.Builder(this)
             .setTitle("Menu Options")
@@ -324,6 +361,12 @@ class MainActivity : AppCompatActivity() {
             .setNegativeButton("Cancel", null)
             .show()
     }
+    // you can also log custom events inside functions if needed
+    private fun logCustomEvent(eventName: String, params: Bundle? = null) {
+        firebaseAnalytics.logEvent(eventName, params)
+        Log.d(TAG, "Logged Firebase event: $eventName")
+    }
 
     data class MenuItem(val title: String, val targetActivity: Class<*>)
+
 }

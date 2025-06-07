@@ -1,7 +1,6 @@
 package com.example.moneytrees1
 
 import android.app.Application
-import android.content.Context
 import android.util.Log
 import androidx.room.Room
 import com.example.moneytrees1.data.AppDatabase
@@ -9,6 +8,7 @@ import com.example.moneytrees1.data.UserRepository
 import com.example.moneytrees1.data.BudgetRepository
 import com.example.moneytrees1.data.CategoryRepository
 import com.example.moneytrees1.data.ExpenseRepository
+import com.example.moneytrees1.data.NotificationRepository
 
 class MyApplication : Application() {
     companion object {
@@ -27,6 +27,8 @@ class MyApplication : Application() {
     lateinit var budgetRepository: BudgetRepository
     lateinit var categoryRepository: CategoryRepository
     lateinit var expenseRepository: ExpenseRepository
+    lateinit var notificationRepository: NotificationRepository
+
 
     override fun onCreate() {
         super.onCreate()
@@ -53,6 +55,8 @@ class MyApplication : Application() {
                 budgetRepository = BudgetRepository(database.budgetDao())
                 categoryRepository = CategoryRepository(database.categoryDao())
                 expenseRepository = ExpenseRepository(database.expenseDao())
+                notificationRepository = NotificationRepository(database.notificationDao())
+
                 Log.d(TAG, "Repositories initialized successfully")
             } catch (e: Exception) {
                 Log.e(TAG, "Error initializing database or repositories", e)

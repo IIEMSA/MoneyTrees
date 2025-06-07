@@ -1,5 +1,6 @@
 package com.example.moneytrees1.ui
 
+// 🏗️ Android Framework
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
@@ -7,20 +8,34 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.*
+
+// 🏛️ AndroidX Libraries
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+
+// 🏠 App Components
 import com.example.moneytrees1.MyApplication
 import com.example.moneytrees1.R
 import com.example.moneytrees1.data.ExpenseEntity
 import com.example.moneytrees1.viewmodels.ExpenseViewModel
 import com.example.moneytrees1.viewmodels.ExpenseViewModelFactory
+
+// 🔥 Firebase Services
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
+
+// 🌀 Coroutines
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
+
+// ⏰ Java Utilities
 import java.util.*
+
 
 class ExpenseActivity : AppCompatActivity() {
 
@@ -41,8 +56,11 @@ class ExpenseActivity : AppCompatActivity() {
     private lateinit var selectImageButton: Button
     private lateinit var imageNameTextView: TextView
     private var imageUri: Uri? = null
-    private var imagePath: String? = null
+    private var uploadedImageUrl: String? = null // URL from Firebase Storage
     private var userId: Int = -1
+
+    private val firestore = FirebaseFirestore.getInstance()
+    private val storage = FirebaseStorage.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,7 +115,8 @@ class ExpenseActivity : AppCompatActivity() {
         // Date Picker
         etDate.setOnClickListener {
             val calendar = Calendar.getInstance()
-            DatePickerDialog(this,
+            DatePickerDialog(
+                this,
                 { _, year, month, day ->
                     val dateString = "%04d-%02d-%02d".format(year, month + 1, day)
                     etDate.setText(dateString)
@@ -111,7 +130,8 @@ class ExpenseActivity : AppCompatActivity() {
         // Time Pickers
         etStartTime.setOnClickListener {
             val calendar = Calendar.getInstance()
-            TimePickerDialog(this,
+            TimePickerDialog(
+                this,
                 { _, hourOfDay, minute ->
                     val timeString = String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute)
                     etStartTime.setText(timeString)
@@ -124,7 +144,8 @@ class ExpenseActivity : AppCompatActivity() {
 
         etEndTime.setOnClickListener {
             val calendar = Calendar.getInstance()
-            TimePickerDialog(this,
+            TimePickerDialog(
+                this,
                 { _, hourOfDay, minute ->
                     val timeString = String.format("%02d:%02d", hourOfDay, minute)
                     etEndTime.setText(timeString)
@@ -151,25 +172,73 @@ class ExpenseActivity : AppCompatActivity() {
             ) {
                 val amount = amountStr.toDoubleOrNull() ?: 0.0
 
-                val expense = ExpenseEntity(
-                    userId = userId,
-                    amount = amount,
-                    name = name,
-                    category = category,
-                    date = date,
-                    description = name,
-                    startTime = startTime,
-                    endTime = endTime,
-                    imagePath = imagePath
-                )
+                CoroutineScope(Dispatchers.Main).launch {
+                    try {
+                        // Upload image if selected and get URL
+                        if (imageUri != null) {
+                            uploadedImageUrl = uploadImageToFirebase(imageUri!!)
+                        }
 
-                expenseViewModel.insertExpense(expense)
-                Toast.makeText(this, "Expense added", Toast.LENGTH_SHORT).show()
-                finish()
+                        // Create expense object with uploadedImageUrl
+                        val expense = ExpenseEntity(
+                            userId = userId,
+                            amount = amount,
+                            name = name,
+                            category = category,
+                            date = date,
+                            description = name,
+                            startTime = startTime,
+                            endTime = endTime,
+                            imagePath = uploadedImageUrl // store Firebase URL here instead of local path
+                        )
+
+                        // Save locally (Room DB)
+                        expenseViewModel.insertExpense(expense)
+
+                        // Save to Firestore
+                        saveExpenseToFirestore(expense)
+
+                        Toast.makeText(this@ExpenseActivity, "Expense added", Toast.LENGTH_SHORT).show()
+                        finish()
+                    } catch (e: Exception) {
+                        Toast.makeText(this@ExpenseActivity, "Failed to save expense: ${e.message}", Toast.LENGTH_LONG).show()
+                    }
+                }
             } else {
                 Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private suspend fun uploadImageToFirebase(uri: Uri): String {
+        val fileName = "expense_images/${UUID.randomUUID()}.jpg"
+        val ref = storage.reference.child(fileName)
+        ref.putFile(uri).await()
+        return ref.downloadUrl.await().toString()
+    }
+
+    private fun saveExpenseToFirestore(expense: ExpenseEntity) {
+        // Use Firestore collection "expenses" with document id auto-generated
+        val expenseMap = hashMapOf(
+            "userId" to expense.userId,
+            "amount" to expense.amount,
+            "name" to expense.name,
+            "category" to expense.category,
+            "date" to expense.date,
+            "description" to expense.description,
+            "startTime" to expense.startTime,
+            "endTime" to expense.endTime,
+            "imageUrl" to expense.imagePath // Firebase URL
+        )
+
+        firestore.collection("expenses")
+            .add(expenseMap)
+            .addOnSuccessListener {
+                // optional: Log or update UI
+            }
+            .addOnFailureListener {
+                // optional: Log error
+            }
     }
 
     private fun selectImageFromGallery() {
@@ -183,24 +252,10 @@ class ExpenseActivity : AppCompatActivity() {
                 val selectedImageUri: Uri? = result.data?.data
                 selectedImageUri?.let { uri ->
                     imageUri = uri
-                    imagePath = getRealPathFromURI(uri)
-                    imageNameTextView.text = imagePath?.substringAfterLast("/") ?: "Image selected"
+                    imageNameTextView.text = uri.lastPathSegment ?: "Image selected"
                 }
             }
         }
-
-    private fun getRealPathFromURI(uri: Uri): String? {
-        val cursor = contentResolver.query(uri, null, null, null, null)
-        return try {
-            cursor?.moveToFirst()
-            val columnIndex = cursor?.getColumnIndex(MediaStore.Images.Media.DATA)
-            if (columnIndex != null && columnIndex >= 0) {
-                cursor.getString(columnIndex)
-            } else null
-        } finally {
-            cursor?.close()
-        }
-    }
 
     private fun setupNavigationListeners() {
         findViewById<ImageView>(R.id.nav_menu).setOnClickListener {

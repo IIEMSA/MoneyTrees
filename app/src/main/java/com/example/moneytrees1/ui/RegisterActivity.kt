@@ -90,30 +90,45 @@ class RegisterActivity : AppCompatActivity() {
     private fun registerUser(user: User) {
         binding.btnRegister.isEnabled = false
 
-        userViewModel.registerUser(
-            user = user,
-            onSuccess = { insertedUserId ->
-                Log.d(TAG, "User registered successfully with id $insertedUserId")
-                // Ensure expenses and budgets for this user are cleared (likely redundant for new user but okay for idempotency)
-                val app = application as MyApplication
-                CoroutineScope(Dispatchers.IO).launch {
-                    app.expenseRepository.clearUserExpenses(insertedUserId.toInt())
-                    app.budgetRepository.clearUserBudgets(insertedUserId.toInt())
-                    runOnUiThread {
-                        showToast("Registration successful! Please log in. 🎉")
-                        navigateToLogin()
-                    }
-                }
-            },
-            onFailure = { error ->
-                runOnUiThread {
+        val auth = com.google.firebase.auth.FirebaseAuth.getInstance()
+
+        auth.createUserWithEmailAndPassword(user.email, binding.etPassword.text.toString())
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    Log.d(TAG, "Firebase Auth: User created")
+
+                    // Continue with local RoomDB storage
+                    userViewModel.registerUser(
+                        user = user,
+                        onSuccess = { insertedUserId ->
+                            Log.d(TAG, "User saved locally with ID $insertedUserId")
+
+                            // Optional: clear user-specific data
+                            val app = application as MyApplication
+                            CoroutineScope(Dispatchers.IO).launch {
+                                app.expenseRepository.clearUserExpenses(insertedUserId.toInt())
+                                app.budgetRepository.clearUserBudgets(insertedUserId.toInt())
+                                runOnUiThread {
+                                    showToast("Registration successful! Please log in. 🎉")
+                                    navigateToLogin()
+                                }
+                            }
+                        },
+                        onFailure = { error ->
+                            showError("Local DB Error: $error")
+                            binding.btnRegister.isEnabled = true
+                            Log.e(TAG, "RoomDB Error: $error")
+                        }
+                    )
+                } else {
                     binding.btnRegister.isEnabled = true
-                    showError(error)
-                    Log.e(TAG, "Registration failed: $error")
+                    val errorMessage = task.exception?.message ?: "Unknown Firebase error"
+                    showError("Firebase Error: $errorMessage")
+                    Log.e(TAG, "Firebase registration failed", task.exception)
                 }
             }
-        )
     }
+
 
     private fun navigateToLogin() {
         val intent = Intent(this, LoginActivity::class.java)

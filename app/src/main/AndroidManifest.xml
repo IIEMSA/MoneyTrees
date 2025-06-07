@@ -26,6 +26,11 @@
             </intent-filter>
         </activity>
 
+        <!-- ForgotPasswordActivity -->
+        <activity
+            android:name=".ui.ForgotPasswordActivity"
+            android:exported="true" />
+
         <!-- Main Activity -->
         <activity
             android:name=".ui.MainActivity"
@@ -72,6 +77,11 @@
         <!-- LeaderboardActivity -->
         <activity
             android:name=".ui.LeaderboardActivity"
+            android:exported="false" />
+
+        <!-- SettingsActivity -->
+        <activity
+            android:name=".ui.SettingsActivity"
             android:exported="false" />
 
         <!-- ProfileActivity -->
