@@ -168,3 +168,5 @@ The development followed a **Research → Plan → Design → Build → Evaluate
 This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
 
 ---
+**Contact**: \ST10380788@IMCONNECT.EDU.ZA/ST10361620@IMCONNECT.EDU.ZA/ST10369736@IMCONNECT.EDU.ZA | [GitHub Profile](https://github.com/IIEMSA/opsc6311-poe-part-2-group1-Lwandle-Chauke)
+**Submission**: This project is part of the Portfolio of Evidence (POE) for OPSC6311.
