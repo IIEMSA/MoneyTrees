@@ -163,6 +163,17 @@ The development followed a **Research → Plan → Design → Build → Evaluate
 
 ---
 
+## Demonstration Video
+
+A comprehensive [video walkthrough]https://youtube.com/shorts/OS-DG-XSF4w showcases:
+
+1. User registration and login process.
+2. Creating expenses with photo attachments.
+3. Setting up budget goals and viewing dashboard visualizations.
+4. Unlocking achievements through consistent logging.
+---
+
+
 ## License
 
 This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
