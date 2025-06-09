@@ -4,148 +4,111 @@
 
 ---
 
-## Project Overview
+##  Project Overview
 
-**Personal Budget Tracker** is an Android application designed to simplify financial management by enabling users to track expenses, set savings goals, and engage with their budgeting through gamification elements. Built with Kotlin and leveraging modern Android development practices, the app ensures a user-friendly experience while maintaining robust functionality.
+**Money Trees** is an intuitive, gamified Android budgeting app built in Kotlin. Designed for modern personal finance management, it helps users control spending, achieve savings goals, and engage in money habits with fun and accountability.
 
-**Target Audience**: Individuals aiming to manage personal finances, monitor spending habits, and achieve savings goals in an engaging and stress-free manner.
+###  Target Audience
 
-**Key Objectives**:
+Individuals who want to take control of their personal finances through intuitive tools and motivational gamification. Ideal for students, young professionals, families, and digital nomads.
 
-* Facilitate easy logging of expenses with categories, photos, and date/time tracking.
-* Encourage consistent usage through achievements, badges, and progress visualizations.
-* Provide actionable insights via graphs, budgets, and category-wise spending analysis.
+### Key Objectives
+
+* Simplify expense logging with a clean, fast UI.
+* Motivate consistent usage with achievements and interactive progress tracking.
+* Deliver actionable financial insights via rich data visualization and alerts.
+* Foster shared accountability through shared wallets and leaderboards.
+
+---
 
 ## What the App Does
 
-The **Money Trees Budget App** is designed to:
+The **Money Trees Budget App** empowers users to:
 
-- Track and categorize your expenses
-- Set personalized budgeting goals and limits
-- Provide real-time financial insights through analytics and reports
-- Engage you with gamified features, including challenges, achievements, and leaderboards
-- Allow shared wallets for group expenses (ideal for families, roommates, and friends)
-- Enable multi-currency tracking for international users
-- Provide reminders and alerts for bill payments and financial goals
-- Sync financial data across devices
-
-By using Money Trees, users can take charge of their money and make informed decisions that lead to greater financial freedom.
+* Track daily expenses and income in categorized formats.
+* Set personalized monthly budgets and category-specific limits.
+* View real-time analytics on spending trends and savings.
+* Stay motivated with mini-games, leaderboards, and achievement systems.
+* Manage shared budgets with friends, family, or roommates using shared wallets.
+* Track finances across multiple currencies (perfect for international travelers).
+* Receive alerts for overspending, upcoming bills, and budget milestones.
+* Sync financial data between mobile and desktop with simulated bank support.
 
 ---
 
-## Features
+## Core Features
 
-### Innovative Features
-- **Shared Wallets**: Perfect for families, couples, or roommates to manage finances together and keep track of group expenses.
-- **Multiple Currencies**: For frequent travelers or users living abroad, track expenses in various currencies with automatic recalculation based on exchange rates.
-- **Alerts and Reminders**: Get reminders for upcoming bill payments, goal updates, and spending limits to stay on top of your finances.
-- **Double-Entry Accounting System**: Uses professional accounting techniques to ensure accurate financial records.
-- **PC Manager Functionality**: Sync your financial data with the mobile app using Wi-Fi for management on both mobile and desktop devices.
+### Gamification
+
+* **Mini-Games** like *Budget Bingo* & *Saving Quest* to reward smart habits.
+* **Points & Rewards** for good budgeting behavior.
+* **Leaderboards** to compete with friends and global users.
+* **Achievements** (e.g., “Budget Boss”, “Savings Streak”, “Spending Sniper”).
 
 ### Budgeting & Financial Goals
-- **Budget Creation**: Set monthly budget goals and track expenses for different categories (e.g., groceries, entertainment, transport).
-- **Progress Dashboard**: View your expenses against your budget, with visual indicators to highlight overages or savings.
 
-### Financial Insights & Analytics
-- **Spending Analytics**: View your spending trends through interactive charts and graphs (e.g., daily spending trends, category breakdowns).
-- **Report Generation**: Generate weekly or monthly reports to analyze your financial habits.
+* Set monthly budget and category-specific goals.
+* View dashboards with spending vs. budget visuals.
+* Get alerts when approaching or exceeding limits.
 
-### Gamification Features
-- **Mini Games**: Play Budget Bingo or Saving Quest, earning points and rewards for reaching financial milestones.
-- **Leaderboards**: Compete with friends or others for top spots on the leaderboard.
-- **Achievements**: Earn badges for reaching savings goals, staying within budget, and other financial milestones.
+### Analytics & Insights
 
-### Shared Wallets (Group Budgeting)
-- **Group Expenses**: Create shared wallets for group expenses and split costs automatically among members.
-- **Contribution Tracking**: Track contributions and receive alerts when funds are running low or additional contributions are needed.
+* Interactive charts and graphs (MPAndroidChart).
+* Daily trends, spending category breakdowns, and savings progress.
+* Weekly and monthly report generation.
 
-### Bank Integration (Simulated)
-- **Simulated Banking Account**: Connect to a simulated bank account to track and manage your transactions, balance, and income.
+### Multi-Currency 
 
-## Requirements
+* Track and convert expenses in multiple currencies.
 
-### 1. User Authentication & Security
-- **Account Registration**: Users must register with a unique username and password.
-- **Data Encryption**: All user credentials are securely encrypted, and end-to-end encryption is used for data transmission.
-- **Session Expiration**: Login sessions should expire after a predefined time for security.
+### Authentication & Security
 
-### 2. Expense Tracking
-- **Categories**: Users can create and categorize expenses (e.g., Groceries, Transport).
-- **Expense Entry**: Users can add details such as:
-  - Amount spent
-  - Date of transaction
-  - Category
-  - Receipt photo (optional)
-- **Filtering & Editing**: Users can filter expenses by date range and edit or delete entries.
-
-### 3. Budgeting & Financial Goals
-- **Set Budget Goals**: Users can set a total monthly budget and individual category limits.
-- **Progress Tracking**: The app provides a progress dashboard showing expenses vs. budget and highlights categories that exceed limits.
-- **Alerts**: Receive alerts when spending exceeds budgets or when approaching a spending threshold.
-
-### 4. Financial Insights & Analytics
-- **Spending Analytics**: View graphs and charts for:
-  - Daily spending trends
-  - Spending breakdown by category
-- **Date Range Filtering**: Filter analytics by date range for custom reports.
-
-### 5. Gamification Features
-- **Mini Games**: Play Budget Bingo or Saving Quest to win prizes and rewards.
-- **Points System**: Earn points for making responsible financial decisions and meeting budget goals.
-- **Leaderboards**: Compete with friends or the global community to earn rewards.
-- **Achievements & Badges**: Earn badges for completing financial milestones.
-
-### 6. Shared Wallets (Group Budgeting)
-- **Group Contributions**: Track expenses and contributions in a shared wallet for group activities or joint budgeting.
-- **Automatic Expense Splitting**: Expenses are split automatically among wallet members, and alerts are sent when contributions are needed.
-
-### 7. Bank Integration (Simulated)
-- **Bank Syncing**: Simulated banking account to track balance and sync transactions (for simulation purposes).
-- **Manual Income Tracking**: Users can manually add income sources and track payments.
-
-### 8. Performance & Optimization
-- **Fast Loading Times**: Ensure smooth and responsive performance, especially when syncing data and updating dashboards.
-- **Real-Time Updates**: The dashboard must refresh in real-time as new transactions are added.
-
-### Technical Highlights
-
-* **Local Database**: Implemented using Room for offline data persistence.
-* **Image Handling**: Utilizes Glide library for efficient photo attachment management.
-* **Input Validation**: Robust error handling to prevent crashes on invalid inputs.
+* User login and account management.
+* End-to-end encryption and secure local storage via Room.
+* Session expiration for added safety.
 
 ---
-## Screenshots of App
-![image](https://github.com/user-attachments/assets/71e3aee4-d378-4f0f-a62a-1270a94e7997)
-![image](https://github.com/user-attachments/assets/4c4db86f-2fbb-4e06-be2a-f468832389c9)
-![image](https://github.com/user-attachments/assets/f0dd214b-5eb7-499a-908b-4387e048eb69)
-![image](https://github.com/user-attachments/assets/dc10bdf0-840f-4aca-ae51-9efb707d4520)
-![image](https://github.com/user-attachments/assets/8a844bba-d3ca-4d38-aa3e-a3e5a55c3182)
-![image](https://github.com/user-attachments/assets/a25816f9-d3de-4b61-ac6c-cc9bd89f864b)
-![image](https://github.com/user-attachments/assets/f7174a2e-96e1-4f4a-9996-f183bebd726b)
-![image](https://github.com/user-attachments/assets/60aa112b-3a03-488d-beac-b42b1b7238ea)
-![image](https://github.com/user-attachments/assets/0b9691b5-0db7-41a5-b010-e3f0a4c4b618)
-![image](https://github.com/user-attachments/assets/824b8901-2c89-4e5a-8b88-2ff46e991dfd)
+
+## Technical Highlights
+
+* **Kotlin** as primary development language.
+* **Room Database** for persistent local data storage.
+* **Glide** for smooth receipt image uploads.
+* **MPAndroidChart** for dynamic financial graphs.
+* **MVVM Architecture** to ensure scalability and maintainability.
+* **Wi-Fi Sync Support** between desktop and mobile for simulated PC-based management.
+
+---
+
+## Database Structure (Room ORM)
+
+| Entity        | Fields                                                                                          | Description                             |
+| ------------- | ----------------------------------------------------------------------------------------------- | --------------------------------------- |
+| `User`        | `userId`, `username`, `password`                                                                | Stores user credentials.                |
+| `Category`    | `categoryId`, `name`                                                                            | Custom expense categories.              |
+| `Expense`     | `expenseId`, `amount`, `date`, `startTime`, `endTime`, `description`, `categoryId`, `photoPath` | Expense entries with optional receipts. |
+| `BudgetGoal`  | `budgetId`, `monthlyLimit`, `categoryLimit`                                                     | Monthly and category budgets.           |
+| `Achievement` | `achievementId`, `name`, `criteria`                                                             | Badges based on app usage and success.  |
+
+---
 
 ## Installation
 
-### Prerequisites
+### Requirements
 
-* Android Studio (latest version)
-* Android device or emulator running API level 26 or higher
+* Android Studio (latest version recommended)
+* Android device or emulator (API 26+)
 
 ### Steps
 
-1. Clone the repository:
+```bash
+git clone https://github.com/IIEMSA/opsc6311-poe-part-2-group1-Lwandle-Chauke
+cd MoneyTrees
+```
 
-   ```bash
-   https://github.com/IIEMSA/opsc6311-poe-part-2-group1-Lwandle-Chauke
-   ```
-
-2\. Open the project in Android Studio.
-
-3\. Sync Gradle dependencies.
-
-4\. Build and run the application on your device or emulator.
+1. Open the project in Android Studio.
+2. Allow Gradle to sync and download dependencies.
+3. Run the app on your emulator or connected Android device.
 
 ### Dependencies
 
@@ -160,87 +123,48 @@ dependencies {
 
 ---
 
-## Database Structure
-
-The application employs Room Database for local data storage, ensuring efficient and structured data management.
-
-### Key Entities
-
-| Entity        | Fields                                                                                          | Description                             |   |
-| ------------- | ----------------------------------------------------------------------------------------------- | --------------------------------------- | - |
-| `User`        | `userId`, `username`, `password`                                                                | Stores user credentials.                |   |
-| `Category`    | `categoryId`, `name`                                                                            | Custom expense categories.              |   |
-| `Expense`     | `expenseId`, `amount`, `date`, `startTime`, `endTime`, `description`, `categoryId`, `photoPath` | Expense entries with optional receipts. |   |
-| `BudgetGoal`  | `budgetId`, `monthlyLimit`, `categoryLimit`                                                     | Monthly and category budgets.           |   |
-| `Achievement` | `achievementId`, `name`, `criteria`                                                             | Unlocked badges and rewards.            |   |
-
----
-
 ## Development Process
 
-The development followed the **Research → Plan → Design → Build → Evaluate** cycle:
+The development followed a **Research → Plan → Design → Build → Evaluate** lifecycle.
 
-### 1. Research
+### Research
 
-* Analysed competitor apps for user experience patterns.
-* Identified user pain points such as tedious logging and lack of motivation.
+* Reviewed apps like Mint, YNAB, and Goodbudget.
+* Found common complaints: steep learning curves, lack of visual engagement.
 
-### 2. Plan
+### Planning
 
-* Prioritised features using the MoSCoW method.
-* Defined the technology stack: RoomDB for data management, Glide for image handling, and MPAndroidChart for data visualisation.
+* Used MoSCoW to prioritize: Must-Have (tracking, goals, shared wallets), Should-Have (analytics, mini-games), etc.
+* Structured architecture with MVVM, Room, and Repository patterns.
 
-### 3. Design
+### Design
 
-* Created wireframes focusing on intuitive navigation and gamified feedback mechanisms.
-* Emphasized user-friendly interfaces with clear visual cues.
+* Wireframes focused on clarity, ease of use, and visual feedback.
+* Created playful but professional UI aligned with a natural theme (trees, coins, growth).
 
-### 4. Build
+### Build
 
-* Implemented features in agile sprints with weekly milestones.
-* Adopted a modular architecture using ViewModel, Repository, and DAO patterns.
+* Developed in agile sprints with defined deliverables.
+* Emphasis on modular components, scalability, and UI/UX polish.
 
-### 5. Evaluate
+### Evaluate
 
-* Conducted user testing to gather feedback, leading to simplified photo attachment processes.
-* Optimized performance, particularly in RecyclerView handling for large datasets.([Tuts+ Code][2])
+* Conducted usability testing among peers.
+* Gathered feedback and iterated on gamification, graphs, and navigation.
 
 ---
 
-## Testing
+## Future Enhancements
 
-### Unit Tests
+* Real-time bank API integration (Plaid or SaltEdge).
+* AI-based financial coaching.
+* Dark mode and accessibility enhancements.
+* Expand mini-games and integrate with Google Play Games Services.
 
-* **ExpenseDao Tests**: Ensured CRUD operations function correctly.
-* **BudgetGoal Validation**: Verified logic for setting and enforcing budget limits.([Stack Overflow][3])
-
-Example:
-
-```kotlin
-@Test
-fun testExpenseInsertion() {
-    val expense = Expense(amount = 50.0, categoryId = 1)
-    database.expenseDao().insert(expense)
-    val expenses = database.expenseDao().getAll()
-    assertEquals(1, expenses.size)
-}
-```
-
-## Demonstration Video
-
-A comprehensive [video walkthrough]https://youtu.be/b5HHN3lk0YQ showcases:
-
-1. User registration and login process.
-2. Creating expenses with photo attachments.
-3. Setting up budget goals and viewing dashboard visualizations.
-4. Unlocking achievements through consistent logging.
 ---
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License – see the [LICENSE](LICENSE) file for details.
 
 ---
-**Contact**: \ST10380788@IMCONNECT.EDU.ZA/ST10361620@IMCONNECT.EDU.ZA/ST10369736@IMCONNECT.EDU.ZA | [GitHub Profile](https://github.com/IIEMSA/opsc6311-poe-part-2-group1-Lwandle-Chauke)
-**Submission**: This project is part of the Portfolio of Evidence (POE) for OPSC6311.
-
