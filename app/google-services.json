@@ -1,0 +1,87 @@
+{
+  "project_info": {
+    "project_number": "250034987899",
+    "firebase_url": "https://vcmsa-moneytrees-default-rtdb.firebaseio.com",
+    "project_id": "vcmsa-moneytrees",
+    "storage_bucket": "vcmsa-moneytrees.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:250034987899:android:6be9700407d90575a553de",
+        "android_client_info": {
+          "package_name": "com.example.moneytrees"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZiPR-IUP5kIBAmrpITjnYjUXCLhrNUJs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:250034987899:android:369b4b4d2186a93ea553de",
+        "android_client_info": {
+          "package_name": "com.example.moneytrees1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZiPR-IUP5kIBAmrpITjnYjUXCLhrNUJs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:250034987899:android:0ee19ef4eb9cc03da553de",
+        "android_client_info": {
+          "package_name": "com.vcmsa.moneytrees"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZiPR-IUP5kIBAmrpITjnYjUXCLhrNUJs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:250034987899:android:bbc69e247296817ba553de",
+        "android_client_info": {
+          "package_name": "vcmsa.projects.moneytrees1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZiPR-IUP5kIBAmrpITjnYjUXCLhrNUJs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

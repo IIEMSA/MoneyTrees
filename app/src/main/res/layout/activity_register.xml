@@ -39,14 +39,14 @@
         android:id="@+id/tvRegisterTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="272dp"
+        android:layout_marginTop="28dp"
         android:text="Register"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/navigation_menu" />
 
     <TextView
         android:id="@+id/tvRegisterSubtitle"
@@ -171,17 +171,14 @@
         app:layout_constraintStart_toEndOf="@id/tvLoginRedirect"
         app:layout_constraintTop_toTopOf="@id/tvLoginRedirect" />
 
-
-
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="205dp"
-        android:layout_height="172dp"
-        android:layout_marginBottom="28dp"
-        app:layout_constraintBottom_toTopOf="@+id/tvRegisterTitle"
-        app:layout_constraintTop_toBottomOf="@+id/navigation_menu"
-        app:layout_constraintVertical_bias="1.0"
+        android:layout_width="248dp"
+        android:layout_height="252dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/official_logo"
-        tools:layout_editor_absoluteX="99dp" />
+        tools:layout_editor_absoluteY="659dp" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

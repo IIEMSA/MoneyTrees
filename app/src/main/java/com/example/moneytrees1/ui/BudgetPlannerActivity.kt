@@ -34,8 +34,7 @@ class BudgetPlannerActivity : AppCompatActivity() {
         MainActivity.MenuItem("Budget Planner", BudgetPlannerActivity::class.java),
         MainActivity.MenuItem("Expense History", ExpenseHistoryActivity::class.java),
         MainActivity.MenuItem("Achievements", AchievementsActivity::class.java),
-        MainActivity.MenuItem("Leaderboard", LeaderboardActivity::class.java),
-        MainActivity.MenuItem("Game", GameActivity::class.java),
+        MainActivity.MenuItem("Save The Bunny Game", LeaderboardActivity::class.java),
         MainActivity.MenuItem("Add Category", CategoryActivity::class.java)
     )
 

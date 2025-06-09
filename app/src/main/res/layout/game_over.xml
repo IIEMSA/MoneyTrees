@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <ImageButton
+            android:id="@+id/btnRestart"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentStart="true"
+            android:background="@drawable/restart"
+            android:onClick="restart"
+            android:scaleType="fitCenter"
+            android:contentDescription="Restart" />
+
+        <ImageButton
+            android:id="@+id/btnExit"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/exit"
+            android:onClick="exit"
+            android:scaleType="fitCenter"
+            android:contentDescription="Exit" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/ivNewHighest"
+            android:layout_width="200dp"
+            android:layout_height="209dp"
+            android:background="@drawable/new_highest"
+            android:visibility="gone" />
+
+        <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Your Points:"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/tvPoints"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="50"
+                    android:textSize="50sp"
+                    android:textColor="@android:color/holo_green_dark"
+                    android:fontFamily="@font/kenney_blocks" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="New save goal: "
+                    android:textSize="24sp"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:fontFamily="sans-serif" />
+
+                <TextView
+                    android:id="@+id/tvSaveGoal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="R50"
+                    android:textSize="24sp"
+                    android:textColor="@android:color/holo_blue_dark"
+                    android:fontFamily="@font/kenney_blocks" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Highest:"
+                    android:textSize="24sp"
+                    android:layout_gravity="center|right" />
+
+                <TextView
+                    android:id="@+id/tvHighest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="100"
+                    android:textSize="24sp"
+                    android:textColor="@android:color/holo_orange_dark"
+                    android:fontFamily="@font/kenney_blocks" />
+
+            </TableRow>
+
+        </TableLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="80dp" />
+    </LinearLayout>
+
+    <!-- 🔽 Leaderboard container (was missing) -->
+    <LinearLayout
+        android:id="@+id/leaderboardContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:gravity="center_horizontal" />
+
+</LinearLayout>

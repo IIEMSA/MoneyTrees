@@ -40,8 +40,6 @@
     </LinearLayout>
 
     <!-- Subtitle under header -->
-
-    <!-- Leaderboard RecyclerView -->
     <TextView
         android:id="@+id/tvSubtitle"
         android:layout_width="0dp"
@@ -55,23 +53,61 @@
         android:textColor="#A64AC9"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/navigation_menu" />
 
+    <!-- Leaderboard RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/leaderboardRecyclerView"
         android:layout_width="340dp"
-        android:layout_height="428dp"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:clipToPadding="false"
         android:paddingBottom="16dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvSubtitle"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintBottom_toTopOf="@id/startSection"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Start Game Section -->
+    <LinearLayout
+        android:id="@+id/startSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="24dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Game Title Image -->
+        <ImageView
+            android:id="@+id/imgGameTitle"
+            android:layout_width="139dp"
+            android:layout_height="190dp"
+            android:src="@drawable/game_title"
+            android:contentDescription="Game Title" />
+
+        <!-- Start Game Button -->
+        <Button
+            android:id="@+id/btnStartGame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="64dp"
+            android:minHeight="48dp"
+            android:padding="16dp"
+            android:text="Start"
+            android:fontFamily="@font/kenney_blocks"
+            android:textSize="32sp"
+            android:textColor="@android:color/white"
+            android:backgroundTint="#ff69b4"
+            android:layout_marginTop="24dp"
+            android:onClick="startGame" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
+

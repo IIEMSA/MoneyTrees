@@ -44,17 +44,15 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
     private val menuItems = listOf(
-        MenuItem("Home", MainActivity::class.java),
-        MenuItem("Dashboard", DashboardActivity::class.java),
-        MenuItem("Profile", ProfileActivity::class.java),
-        MenuItem("Add Expense", ExpenseActivity::class.java),
-        MenuItem("Budget Planner", BudgetPlannerActivity::class.java),
-        MenuItem("Expense History", ExpenseHistoryActivity::class.java),
-        MenuItem("Achievements", AchievementsActivity::class.java),
-        MenuItem("Leaderboard", LeaderboardActivity::class.java),
-        MenuItem("Game", GameActivity::class.java),
-        MenuItem("Settings", SettingsActivity::class.java),
-        MenuItem("Add Category", CategoryActivity::class.java)
+        MainActivity.MenuItem("Home", MainActivity::class.java),
+        MainActivity.MenuItem("Dashboard", DashboardActivity::class.java),
+        MainActivity.MenuItem("Profile", ProfileActivity::class.java),
+        MainActivity.MenuItem("Add Expense", ExpenseActivity::class.java),
+        MainActivity.MenuItem("Budget Planner", BudgetPlannerActivity::class.java),
+        MainActivity.MenuItem("Expense History", ExpenseHistoryActivity::class.java),
+        MainActivity.MenuItem("Achievements", AchievementsActivity::class.java),
+        MainActivity.MenuItem("Save The Bunny Game", LeaderboardActivity::class.java),
+        MainActivity.MenuItem("Add Category", CategoryActivity::class.java)
     )
 
     private lateinit var binding: ActivityMainBinding

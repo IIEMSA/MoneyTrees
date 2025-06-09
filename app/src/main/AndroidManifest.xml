@@ -70,9 +70,7 @@
             android:exported="false" />
 
         <!-- GameActivity -->
-        <activity
-            android:name=".ui.GameActivity"
-            android:exported="false" />
+        <activity android:name=".ui.GameOver" />
 
         <!-- LeaderboardActivity -->
         <activity

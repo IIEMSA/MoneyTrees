@@ -24,8 +24,7 @@ class LeaderboardActivity : AppCompatActivity() {
         MainActivity.MenuItem("Budget Planner", BudgetPlannerActivity::class.java),
         MainActivity.MenuItem("Expense History", ExpenseHistoryActivity::class.java),
         MainActivity.MenuItem("Achievements", AchievementsActivity::class.java),
-        MainActivity.MenuItem("Leaderboard", LeaderboardActivity::class.java),
-        MainActivity.MenuItem("Game", GameActivity::class.java),
+        MainActivity.MenuItem("Save The Bunny Game", LeaderboardActivity::class.java),
         MainActivity.MenuItem("Add Category", CategoryActivity::class.java)
     )
 
@@ -36,9 +35,12 @@ class LeaderboardActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.leaderboardRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        val realUserName = "You 🌟"
+        // 🧑 Get the actual player name and score from intent
+        val userName = intent.getStringExtra("USER_NAME") ?: "You 🌟"
+        val userScore = intent.getIntExtra("USER_SCORE", 0)
 
-        val demoUsers = listOf(
+        // 🏆 Demo leaderboard users
+        val demoUsers = mutableListOf(
             LeaderboardUser("Lorelai Gilmore", 8700),
             LeaderboardUser("Monica Geller", 8500),
             LeaderboardUser("Miles Morales", 8300),
@@ -47,21 +49,43 @@ class LeaderboardActivity : AppCompatActivity() {
             LeaderboardUser("Rory Gilmore", 7700),
             LeaderboardUser("Phil Dunphy", 7400),
             LeaderboardUser("Peter Parker", 7100),
-            LeaderboardUser("Dwight Schrute", 6900),
-            LeaderboardUser(realUserName, 7200)
-        ).sortedByDescending { it.score }
+            LeaderboardUser("Dwight Schrute", 6900)
+        )
 
-        recyclerView.adapter = LeaderboardAdapter(demoUsers, realUserName)
+        // 🔁 Prevent duplicate user entry
+        demoUsers.removeAll { it.name == userName }
+
+        // ➕ Add real user score if valid
+        if (userScore > 0) {
+            demoUsers.add(LeaderboardUser(userName, userScore))
+        }
+
+        // 🔽 Sort from highest to lowest score
+        val sortedUsers = demoUsers.sortedByDescending { it.score }
+
+        // 🎯 Set adapter with highlighted real user
+        recyclerView.adapter = LeaderboardAdapter(sortedUsers, userName)
+
+        // ☰ Setup menu click
+        setupNavigationListeners()
     }
 
-    // Setup navigation menu items click listeners
+    // ☰ Handle menu button click
     private fun setupNavigationListeners() {
-        // ☰ Show side menu with options
         findViewById<ImageView>(R.id.nav_menu).setOnClickListener {
             showSideMenu()
         }
     }
 
+    fun startGame(view: View) {
+        // 🔁 Replace content with GameView
+        val gameView = GameView(this)
+        setContentView(gameView)
+    }
+
+
+
+    // 📋 Side menu
     private fun showSideMenu() {
         AlertDialog.Builder(this)
             .setTitle("Menu Options")
@@ -76,3 +100,5 @@ class LeaderboardActivity : AppCompatActivity() {
     // 🗂 Data class for menu items
     data class MenuItem(val title: String, val targetActivity: Class<*>)
 }
+
+
